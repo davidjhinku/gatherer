@@ -5,7 +5,9 @@ Gather is an overhead (Orthographic, top-down, isometric, pokemon-style?) explor
 
 ## Functionality and MVPs
 In Gatherer, users will be able to: 
-* Walk through the world
+* `User` navigates using arrow keys
+* `User` can use a mouse click on tree or spacebar to pick fruit
+* 
 
 In addition, this project will include:
 * 
