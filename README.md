@@ -12,7 +12,13 @@ In Gatherer, users will be able to:
 * `Basket` starts empty and will hold fruits collected
           
 ## Wireframes
-To be added
+<p align="center"> 
+  <img src="https://i.ibb.co/TBGtZ6b/readme-header.png">
+</p>
+
+<p align="center"> 
+  <img src="https://i.ibb.co/TBGtZ6b/readme-header.png">
+</p>
 
 ## File Structure
 * /dist
