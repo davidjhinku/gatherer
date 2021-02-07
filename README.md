@@ -8,11 +8,9 @@ In Gatherer, users will be able to:
 * `User` navigates using arrow keys
 * `User` clicks spacebar to pick fruit
 * `Tree` can hold fruits, one will be the fruit users are searching for
-* `User` is tasked with collecting certain fruits and must add them to their basket
-
-In addition, this project will include:
-* 
-
+* `User` is tasked with collecting certain fruits and must add them to their `Basket`
+* `Basket` starts empty and will hold fruits collected
+          
 ## Wireframes
 To be added
 
