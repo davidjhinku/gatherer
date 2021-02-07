@@ -13,12 +13,26 @@ In Gatherer, users will be able to:
           
 ## Wireframes
 <p align="center"> 
-  <img src="https://i.ibb.co/TBGtZ6b/readme-header.png">
+  <img src="https://raw.githubusercontent.com/davidjhinku/gatherer/main/src/assets/wireframe_splash.png">
 </p>
 
+* Splash page will have screen from the game
+    * Potential for character to be walking around world
+* Button to toggle sound
+* Button for `How to play`
+
 <p align="center"> 
-  <img src="https://i.ibb.co/TBGtZ6b/readme-header.png">
+  <img src="https://raw.githubusercontent.com/davidjhinku/gatherer/main/src/assets/wireframe_game.png">
 </p>
+
+* Game board larger than view for user
+* Tree with fruit spawns randomly on the board
+* User will need to find the tree
+* Toggle for music
+* Tree's with no fruit also load
+* Basket to see what fruit is collected
+    * Will be more useful with bonus feature of multiple fruits/longer list to collect
+* Bonus for environmental barriers
 
 ## File Structure
 * /dist
@@ -78,3 +92,4 @@ Day 5 - Feb 12
 
 ## Bonus Features
 * Different objects can be added for the users to find ingredients on (bushes, gardens, etc)
+* Environmental barriers (rocks, multiple levels) that user will need to find a way around
