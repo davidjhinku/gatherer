@@ -1,4 +1,6 @@
-# Gatherer
+<p align="center"> 
+  <img src="https://raw.githubusercontent.com/davidjhinku/gatherer/main/src/assets/splash_logo.png">
+</p>
 
 ## Background and Overview
 Gather is an overhead (Orthographic, top-down, isometric, pokemon-style?) exploration game designed for relaxation in the time of COVID. Users will receive a random list of fruit (potential for other things built upon this plants/ingredients) then set out to explore terain to collect items on their list with a relaxing soundtrack in the background (potential to have sound at areas or random tracks). 
