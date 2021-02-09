@@ -60,7 +60,7 @@ function updatePlayer() {
     total_trees.forEach((tree) => {
         let collision = objCollision(player, tree);
         if(collision) {
-            console.log('Colliding!')
+            // console.log('Colliding!')
             colliding = true
         }
     })
@@ -124,10 +124,12 @@ for (let i = 0; i < 10; i++) {
     total_trees.push(constructTree);
     constructTree.drawTree(ctx)
 }
+
 function updateTrees(treeArr) {
     let playerOffsetX = player.posX - canvas.width/2
     let playerOffsetY = player.posY - canvas.height/2
 
+    // console.log(playerOffsetX)
     treeArr.forEach((tree)=>{
         // tree.drawTree(ctx)
         tree.drawTree(ctx, playerOffsetX, playerOffsetY)
