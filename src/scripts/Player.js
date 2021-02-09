@@ -15,11 +15,12 @@ class Player {
         this.down = false;
     }
 
-    drawPlayer(ctx){
+    drawPlayer(ctx, width, height){
         ctx.fillStyle = 'blue'
         // ctx.fillRect(this.posX, this.posY, this.width, this.height)
-        ctx.fillRect(this.posX, this.posY, this.width, this.height)
-        ctx.drawImage(this.player, 0, 0, 32, 32, this.posX, this.posY, this.width, this.height)
+        // ctx.fillRect(this.posX, this.posY, this.width, this.height)
+        // ctx.drawImage(this.player, 0, 0, 32, 32, this.posX, this.posY, this.width, this.height)
+        ctx.drawImage(this.player, 0, 0, 32, 32, width, height, this.width, this.height)
     }
 
     clearPlayer(ctx) {

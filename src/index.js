@@ -23,9 +23,12 @@ ctx.fillText('Henlo', 10, 50);
 window.requestAnimationFrame(animate)
 function animate(){
     ctx.imageSmoothingEnabled = false;
+    ctx.clearRect(0,0,canvas.width,canvas.height)
+
     drawMap();
     updateTrees(total_trees);
     updatePlayer();
+
     window.requestAnimationFrame(animate)
 }
 
@@ -41,7 +44,9 @@ function objCollision(player, tree) {
 // let map = new Map(0, 0)
 let map = new Map(1000, 750)
 function drawMap(){
-    map.drawMap(ctx)
+    let playerOffsetX = canvas.width/2 - player.posX
+    let playerOffsetY = canvas.height/2 - player.posY
+    map.drawMap(ctx, playerOffsetX, playerOffsetY)
 }
 
 //For the player
@@ -61,9 +66,9 @@ function updatePlayer() {
     })
 
     // if (!colliding){
-        player.clearPlayer(ctx)
+        // player.clearPlayer(ctx)
         player.movePlayer();
-        player.drawPlayer(ctx)
+        player.drawPlayer(ctx, canvas.width/2, canvas.height/2)
     // }
 }
 
@@ -120,8 +125,12 @@ for (let i = 0; i < 10; i++) {
     constructTree.drawTree(ctx)
 }
 function updateTrees(treeArr) {
+    let playerOffsetX = player.posX - canvas.width/2
+    let playerOffsetY = player.posY - canvas.height/2
+
     treeArr.forEach((tree)=>{
-        tree.drawTree(ctx)
+        // tree.drawTree(ctx)
+        tree.drawTree(ctx, playerOffsetX, playerOffsetY)
     })
 }
 

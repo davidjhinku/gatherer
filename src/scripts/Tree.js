@@ -10,10 +10,16 @@ class Tree {
         this.fruit = fruit;
     }
 
-    drawTree(ctx) {
-        ctx.fillStyle = 'brown'
+    drawTree(ctx, offsetX, offsetY) {
+        // ctx.fillStyle = 'brown'
         ctx.fillRect(this.posX, this.posY, this.width, this.height)
+        let playerOffsetX = this.posX - offsetX - self.width
+        let playerOffsetY = this.posY - offsetY - self.height
+
         ctx.drawImage(this.tree, this.posX, this.posY, this.width, this.height)
+
+        // ctx.drawImage(this.tree, this.posX, this.posY, this.width, this.height, offsetX, offsetY, this.width, this.height)
+        ctx.drawImage(this.tree, this.posX, this.posY, this.width, this.height, playerOffsetX, playerOffsetY, this.width, this.height)
     }
 
     randomTree(){
