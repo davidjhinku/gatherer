@@ -1,1 +1,4 @@
-//Make this the scss entry file all others pull into here
+@import "./reset.scss";
+@import "./colors.scss";
+@import "./body.scss";
+@import "./canvas.scss";
