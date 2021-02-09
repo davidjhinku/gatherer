@@ -18,8 +18,29 @@ ctx.font = '50px Ariel';
 
 ctx.fillText('Henlo', 10, 50);
 
+window.requestAnimationFrame(draw)
+// setInterval(draw, 10)
+
+function draw() {
+    // ctx.clearRect(0,0, canvas.width, canvas.height)
+
+    if (test_player.posX > canvas.width || test_player.posX < 0) {
+        test_player.speedX = -test_player.speedX
+    }
+
+    if (test_player.posY > canvas.height || test_player.posY < 0) {
+        test_player.speedY = -test_player.speedY
+    }
+
+    test_player.posX += test_player.speedX;
+    test_player.posY += test_player.speedY;
+
+    test_player.drawPlayer(ctx)
+    window.requestAnimationFrame(draw)
+}
+
 //For the player
-let test_player = new Player(100, 100)
+let test_player = new Player(300, 450)
 test_player.drawPlayer(ctx)
 
 // let leftArrow = false;

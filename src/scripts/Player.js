@@ -3,7 +3,8 @@ class Player {
     constructor(posX, posY) {
         this.posX = posX;
         this.posY = posY;
-        this.speed = 5
+        this.speedX = 5;
+        this.speedY = 5
     }
 
     drawPlayer(ctx){
