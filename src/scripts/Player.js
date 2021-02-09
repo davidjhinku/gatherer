@@ -1,10 +1,12 @@
 
 class Player {
     constructor(posX, posY) {
+        this.player = new Image();
+        this.player.src = 'src/assets/images/sprite_player.png'
         this.posX = posX;
         this.posY = posY;
-        this.width = 20;
-        this.height = 20;
+        this.width = 100;
+        this.height = 100;
         this.speedX = 5;
         this.speedY = 5
         this.left = false;
@@ -15,7 +17,9 @@ class Player {
 
     drawPlayer(ctx){
         ctx.fillStyle = 'blue'
+        // ctx.fillRect(this.posX, this.posY, this.width, this.height)
         ctx.fillRect(this.posX, this.posY, this.width, this.height)
+        ctx.drawImage(this.player, 0, 0, 32, 32, this.posX, this.posY, this.width, this.height)
     }
 
     clearPlayer(ctx) {
@@ -37,9 +41,6 @@ class Player {
         }
     }
 }
-
-// const playerSprite = new Image()
-// playerSprite.src = '../assets/sprite_player'
 
 
 export default Player;

@@ -1,6 +1,8 @@
 import './styles/index.scss';
+import Map from './scripts/Map'
 import Player from './scripts/Player';
 import Tree from './scripts/Tree';
+
 
 let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext("2d");
@@ -20,36 +22,49 @@ ctx.fillText('Henlo', 10, 50);
 
 window.requestAnimationFrame(animate)
 function animate(){
-    
-    updatePlayer()
+    ctx.imageSmoothingEnabled = false;
+    drawMap();
+    updateTrees(total_trees);
+    updatePlayer();
     window.requestAnimationFrame(animate)
 }
 
-function objCollision(obj1, obj2) {
-    return (obj1.posX <= obj2.posX + obj2.width &&
-        obj2.posX <= obj1.posX + obj1.width &&
-        obj1.posY <= obj2.posY + obj2.height &&
-        obj2.posY <= obj1.posY + obj1.height
+function objCollision(player, tree) {
+    return (player.posX <= tree.posX + tree.width &&
+        tree.posX <= player.posX + player.width &&
+        player.posY <= tree.posY + tree.height &&
+        tree.posY <= player.posY + player.height
     )
 }
 
+//For the map
+// let map = new Map(0, 0)
+let map = new Map(1000, 750)
+function drawMap(){
+    map.drawMap(ctx)
+}
+
 //For the player
-let player = new Player(300, 450)
+let player = new Player(500, 350)
 player.drawPlayer(ctx)
 
 function updatePlayer() {
 
     //Check for tree collision
+    let colliding
     total_trees.forEach((tree) => {
         let collision = objCollision(player, tree);
         if(collision) {
             console.log('Colliding!')
+            colliding = true
         }
     })
 
-    player.clearPlayer(ctx)
-    player.movePlayer();
-    player.drawPlayer(ctx)
+    // if (!colliding){
+        player.clearPlayer(ctx)
+        player.movePlayer();
+        player.drawPlayer(ctx)
+    // }
 }
 
 const LEFT_KEY = 37;
@@ -95,6 +110,7 @@ function keyRelease(e) {
 
 //For the trees
 let total_trees = [];
+
 for (let i = 0; i < 10; i++) {
     let randX = Math.random() * canvas.width;
     let randY = Math.random() * canvas.height;
@@ -102,6 +118,11 @@ for (let i = 0; i < 10; i++) {
     let constructTree = new Tree(randX, randY, false);
     total_trees.push(constructTree);
     constructTree.drawTree(ctx)
+}
+function updateTrees(treeArr) {
+    treeArr.forEach((tree)=>{
+        tree.drawTree(ctx)
+    })
 }
 
 
