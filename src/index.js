@@ -7,10 +7,10 @@ let ctx = canvas.getContext("2d");
 
 //Event Listeners
 document.addEventListener('keydown', keyPressed);
-// document.addEventListener('keyup', keyRelease)
+document.addEventListener('keyup', keyRelease)
 
 
-//Canvas Details
+//Canvas Code
 canvas.width = 1000;
 canvas.height = 700;
 canvas.style.background = "#52B788"
@@ -18,19 +18,14 @@ ctx.font = '50px Ariel';
 
 ctx.fillText('Henlo', 10, 50);
 
-window.requestAnimationFrame(updatePlayer)
-// setInterval(updatePlayer, 10)
-
-
-// function distBtwnObjects(obj1, obj2) {
-//     const dX = obj1.posX - obj2.posX;
-//     const dY = obj1.posY - obj2.posY;
-//     return Math.sqrt(dX*dX + dY*dY);
-// }
+window.requestAnimationFrame(animate)
+function animate(){
+    
+    updatePlayer()
+    window.requestAnimationFrame(animate)
+}
 
 function objCollision(obj1, obj2) {
-    // const dist = distBtwnObjects(obj1, obj2);
-    // return dist < 30;
     return (obj1.posX <= obj2.posX + obj2.width &&
         obj2.posX <= obj1.posX + obj1.width &&
         obj1.posY <= obj2.posY + obj2.height &&
@@ -39,61 +34,64 @@ function objCollision(obj1, obj2) {
 }
 
 //For the player
-let test_player = new Player(300, 450)
-test_player.drawPlayer(ctx)
+let player = new Player(300, 450)
+player.drawPlayer(ctx)
 
 function updatePlayer() {
-    // ctx.clearRect(0,0, canvas.width, canvas.height)
-
-    // if (test_player.posX > canvas.width || test_player.posX < 0) {
-    //     test_player.speedX = -test_player.speedX
-    // }
-    // if (test_player.posY > canvas.height || test_player.posY < 0) {
-    //     test_player.speedY = -test_player.speedY
-    // }
-
-    // // Set the new position
-    // test_player.posX += test_player.speedX;
-    // test_player.posY += test_player.speedY;
 
     //Check for tree collision
     total_trees.forEach((tree) => {
-        let collision = objCollision(test_player, tree);
+        let collision = objCollision(player, tree);
         if(collision) {
             console.log('Colliding!')
         }
     })
 
-    // test_player.clearPlayer(ctx)
-    // test_player.drawPlayer(ctx)
-    // console.log(test_player.posX)
-    window.requestAnimationFrame(updatePlayer)
+    player.clearPlayer(ctx)
+    player.movePlayer();
+    player.drawPlayer(ctx)
 }
 
-let moving = false
 const LEFT_KEY = 37;
 const RIGHT_KEY = 39;
 const UP_KEY = 38;
 const DOWN_KEY = 40;
 
-
 function keyPressed(e) {
-    // console.log(e.keyCode)
     switch(e.keyCode){
         case LEFT_KEY:
-            test_player.moveHorizontal(ctx, -test_player.speedX)
+            player.left = true
+            break
         case RIGHT_KEY:
-            test_player.moveHorizontal(ctx, test_player.speedX)
+            player.right = true
+            break
         case UP_KEY:
-            test_player.moveVertical(ctx, -test_player.speedY)
+            player.up = true
+            break
         case DOWN_KEY:
-            test_player.moveVertical(ctx, test_player.speedY)
+            player.down = true
+            break
     }
 }
 
-// function keyRelease(e) {
-//     moving = false
-// }
+function keyRelease(e) {
+    switch (e.keyCode) {
+        case LEFT_KEY:
+            player.left = false
+            break
+        case RIGHT_KEY:
+            player.right = false
+            break
+        case UP_KEY:
+            player.up = false
+            break
+        case DOWN_KEY:
+            player.down = false
+            break
+    }
+}
+
+
 
 //For the trees
 let total_trees = [];

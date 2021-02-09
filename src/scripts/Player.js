@@ -7,6 +7,10 @@ class Player {
         this.height = 20;
         this.speedX = 5;
         this.speedY = 5
+        this.left = false;
+        this.right = false;
+        this.up = false;
+        this.down = false;
     }
 
     drawPlayer(ctx){
@@ -14,42 +18,28 @@ class Player {
         ctx.fillRect(this.posX, this.posY, this.width, this.height)
     }
 
-    // clearPlayer(ctx) {
-    //     let prevX = this.posX - this.speedX;
-    //     let prevY = this.posY - this.speedY;
-    //     ctx.clearRect(prevX, prevY, this.width, this.height)
-    // }
-
-    moveHorizontal(ctx, movement){
-        console.log(movement)
-        this.posX += movement
-        let prevX = this.posX - this.speedX;
-        ctx.clearRect(prevX, this.posY, this.width, this.height)
-        this.drawPlayer(ctx)
+    clearPlayer(ctx) {
+        ctx.clearRect(this.posX, this.posY, this.width, this.height)
     }
 
-    moveVertical(ctx, movement){
-        console.log(movement)
-        this.posY += movement
-        let prevY = this.posY - this.speedY;
-        ctx.clearRect(this.posX, prevY, this.width, this.height)
-        this.drawPlayer(ctx)
+    movePlayer() {
+        if (this.left) {
+            this.posX -= this.speedX
+        }
+        if (this.right) {
+            this.posX += this.speedX
+        }
+        if (this.up) {
+            this.posY -= this.speedY
+        }
+        if (this.down) {
+            this.posY += this.speedY
+        }
     }
 }
 
 // const playerSprite = new Image()
 // playerSprite.src = '../assets/sprite_player'
 
-// const player = {
-//     x: 0,
-//     y: 0,
-//     width: 32,
-//     heigh: 32,
-//     frameX: 0,
-//     frameY: 0,
-//     speed: 5,
-//     moving: false
-
-// }
 
 export default Player;
