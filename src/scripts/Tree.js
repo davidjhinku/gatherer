@@ -12,8 +12,10 @@ class Tree {
     }
 
     drawTree(ctx, offsetX, offsetY) {
-        let playerOffsetX = Math.floor(this.posX + offsetX - this.width)
-        let playerOffsetY = Math.floor(this.posY + offsetY - this.height)
+        let playerOffsetX = this.posX + offsetX - this.width;
+        let playerOffsetY = this.posY + offsetY - this.height;
+        // let playerOffsetX = Math.floor(this.posX + offsetX - this.width)
+        // let playerOffsetY = Math.floor(this.posY + offsetY - this.height)
 
         ctx.drawImage(this.tree, 0, 0, this.tree.width, this.tree.height, playerOffsetX, playerOffsetY, this.width, this.height)
     }

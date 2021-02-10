@@ -24,8 +24,8 @@ let decorations = [];
 
 // canvas.style.background = "#52B788"
 // ctx.font = '50px Ariel';
-
-window.requestAnimationFrame(animate)
+setInterval(animate, 1000)
+// window.requestAnimationFrame(animate)
 
 function animate(){
     ctx.imageSmoothingEnabled = false;
@@ -42,7 +42,7 @@ function animate(){
     // Tree.updateTrees(total_trees, ctx, playerOffsetX, playerOffsetY);
     updatePlayer();
 
-    window.requestAnimationFrame(animate)
+    // window.requestAnimationFrame(animate)
 }
 
 function objCollision(player, tree) {
@@ -61,7 +61,7 @@ function updatePlayer() {
     total_trees.forEach((tree) => {
         let collision = objCollision(player, tree);
         if(collision) {
-            // console.log('Colliding!')
+            console.log('Colliding!')
             colliding = true
         }
     })
