@@ -4,12 +4,12 @@ class Basket  {
         this.items = []
     }
 
-    addItem() {
-
+    addItem(fruit) {
+        this.items.push(fruit)
     }
 
-    hasItem(){
-        
+    hasItem(fruit){
+        return !!this.items[fruit]
     }
 }
 

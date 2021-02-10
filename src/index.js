@@ -3,6 +3,8 @@ import Map from './scripts/Map'
 import Player from './scripts/Player';
 import Input from './scripts/Input'
 import Tree from './scripts/Tree';
+import Basket from './scripts/Basket';
+import Decoration from './scripts/Decoration'
 
 ////Canvas Dimensions
 let canvas = document.getElementById('canvas');
@@ -15,8 +17,10 @@ let mapHeight = 1500 * 2;
 ////Objects
 let map = new Map(mapWidth, mapHeight);
 let player = new Player(500, 350);
+let basket = new Basket();
 new Input(player);
 let total_trees = [];
+let decorations = [];
 
 // canvas.style.background = "#52B788"
 // ctx.font = '50px Ariel';
@@ -33,6 +37,7 @@ function animate(){
     
     map.updateMap(playerOffsetX, playerOffsetY)
     map.drawMap(ctx);
+    updateDecorations(decorations, playerOffsetX, playerOffsetY)
     updateTrees(total_trees, playerOffsetX, playerOffsetY);
     // Tree.updateTrees(total_trees, ctx, playerOffsetX, playerOffsetY);
     updatePlayer();
@@ -99,5 +104,25 @@ for (let i = 0; i < 3; i++) {
 function updateTrees(treeArr, offsetX, offsetY) {
     treeArr.forEach((tree)=>{
         tree.drawTree(ctx, offsetX, offsetY)
+    })
+}
+
+//Decorations
+for (let i = 0; i < 100; i++) {
+    let randX = Math.floor(Math.random() * mapWidth);
+    let randY = Math.floor(Math.random() * mapHeight);
+
+    //to spawn away from edge by size of tree
+    if (randX < 170) randX += 170
+    if (randY < 236) randY += 236
+
+    let constructDecoration = new Decoration(randX, randY);
+    decorations.push(constructDecoration);
+    constructDecoration.drawDecoration(ctx)
+}
+
+function updateDecorations(decorationArr, offsetX, offsetY) {
+    decorationArr.forEach((dec) => {
+        dec.drawDecoration(ctx, offsetX, offsetY)
     })
 }
