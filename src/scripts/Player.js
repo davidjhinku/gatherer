@@ -17,9 +17,6 @@ class Player {
 
     drawPlayer(ctx, width, height){
         ctx.fillStyle = 'blue'
-        // ctx.fillRect(this.posX, this.posY, this.width, this.height)
-        // ctx.fillRect(this.posX, this.posY, this.width, this.height)
-        // ctx.drawImage(this.player, 0, 0, 32, 32, this.posX, this.posY, this.width, this.height)
         ctx.drawImage(this.player, 0, 0, 32, 32, width, height, this.width, this.height)
     }
 
@@ -27,17 +24,17 @@ class Player {
         ctx.clearRect(this.posX, this.posY, this.width, this.height)
     }
 
-    movePlayer() {
-        if (this.left) {
+    movePlayer(mapWidth, mapHeight) {
+        if (this.left && this.posX > 0) {
             this.posX -= this.speedX
         }
-        if (this.right) {
+        if (this.right && this.posX < mapWidth - this.width) {
             this.posX += this.speedX
         }
-        if (this.up) {
+        if (this.up && this.posY > 0) {
             this.posY -= this.speedY
         }
-        if (this.down) {
+        if (this.down && this.posY < mapHeight - this.height) {
             this.posY += this.speedY
         }
     }

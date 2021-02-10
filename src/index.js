@@ -15,6 +15,8 @@ document.addEventListener('keyup', keyRelease)
 //Canvas Code
 canvas.width = 1000;
 canvas.height = 700;
+let mapWidth = 2000 * 2;
+let mapHeight = 1500 * 2;
 canvas.style.background = "#52B788"
 ctx.font = '50px Ariel';
 
@@ -46,7 +48,7 @@ let map = new Map(1000, 750)
 function drawMap(){
     let playerOffsetX = canvas.width/2 - player.posX
     let playerOffsetY = canvas.height/2 - player.posY
-    map.drawMap(ctx, playerOffsetX, playerOffsetY)
+    map.drawMap(ctx, mapWidth, mapHeight, playerOffsetX, playerOffsetY)
 }
 
 //For the player
@@ -60,14 +62,14 @@ function updatePlayer() {
     total_trees.forEach((tree) => {
         let collision = objCollision(player, tree);
         if(collision) {
-            // console.log('Colliding!')
+            console.log('Colliding!')
             colliding = true
         }
     })
 
     // if (!colliding){
         // player.clearPlayer(ctx)
-        player.movePlayer();
+        player.movePlayer(mapWidth, mapHeight);
         player.drawPlayer(ctx, canvas.width/2, canvas.height/2)
     // }
 }
@@ -111,14 +113,13 @@ function keyRelease(e) {
     }
 }
 
-
-
 //For the trees
 let total_trees = [];
 
-for (let i = 0; i < 10; i++) {
-    let randX = Math.random() * canvas.width;
-    let randY = Math.random() * canvas.height;
+for (let i = 0; i < 100; i++) {
+    let randX = Math.floor(Math.random() * mapWidth);
+    let randY = Math.floor(Math.random() * mapHeight);
+
 
     let constructTree = new Tree(randX, randY, false);
     total_trees.push(constructTree);
@@ -129,7 +130,6 @@ function updateTrees(treeArr) {
     let playerOffsetX = player.posX - canvas.width/2
     let playerOffsetY = player.posY - canvas.height/2
 
-    // console.log(playerOffsetX)
     treeArr.forEach((tree)=>{
         // tree.drawTree(ctx)
         tree.drawTree(ctx, playerOffsetX, playerOffsetY)
