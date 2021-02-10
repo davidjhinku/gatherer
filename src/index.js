@@ -24,8 +24,8 @@ let decorations = [];
 
 // canvas.style.background = "#52B788"
 // ctx.font = '50px Ariel';
-setInterval(animate, 1000)
-// window.requestAnimationFrame(animate)
+// setInterval(animate, 1000)
+window.requestAnimationFrame(animate)
 
 function animate(){
     ctx.imageSmoothingEnabled = false;
@@ -41,15 +41,15 @@ function animate(){
     updateTrees(total_trees, playerOffsetX, playerOffsetY);
     // Tree.updateTrees(total_trees, ctx, playerOffsetX, playerOffsetY);
     updatePlayer();
-
-    // window.requestAnimationFrame(animate)
+    
+    window.requestAnimationFrame(animate)
 }
 
 function objCollision(player, tree) {
-    return (player.posX <= tree.posX + tree.width &&
-        tree.posX <= player.posX + player.width &&
-        player.posY <= tree.posY + tree.height &&
-        tree.posY <= player.posY + player.height
+    return (player.posX <= tree.posX &&
+        tree.posX - tree.width <= player.posX + player.width &&
+        player.posY <= tree.posY &&
+        tree.posY - tree.height <= player.posY + player.height
     )
 }
 
@@ -97,6 +97,7 @@ for (let i = 0; i < 3; i++) {
     if (randY < 236) randY += 236
 
     let fruitTree = new Tree(randX, randY, true, fruits[i])
+    // let fruitTree = new Tree(310, 300, true, "apple")
     total_trees.push(fruitTree);
     fruitTree.drawTree(ctx)
 }
