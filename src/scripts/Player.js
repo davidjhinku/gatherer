@@ -9,6 +9,8 @@ class Player {
         this.height = 100;
         this.speedX = 5;
         this.speedY = 5
+        this.direction = 0;
+        this.walkingAnimation = 0;
         this.left = false;
         this.right = false;
         this.up = false;
@@ -16,8 +18,13 @@ class Player {
     }
 
     drawPlayer(ctx, width, height){
-        ctx.fillStyle = 'blue'
-        ctx.drawImage(this.player, 0, 0, 32, 32, width, height, this.width, this.height)
+        // ctx.fillStyle = 'blue'
+
+        let spriteWidth = this.player.width / 4
+        let spriteHeight = this.player.height / 4
+        let spriteAnimation = Math.floor(this.walkingAnimation % 4)
+
+        ctx.drawImage(this.player, spriteAnimation * spriteWidth, this.direction*spriteHeight, spriteWidth, spriteHeight, width, height, this.width, this.height)
     }
 
     clearPlayer(ctx) {
@@ -25,17 +32,32 @@ class Player {
     }
 
     movePlayer(mapWidth, mapHeight) {
+        let directions = {
+            "down": 0,
+            "up": 1,
+            "left": 2,
+            "right": 3
+        }
+
         if (this.left && this.posX > 0) {
             this.posX -= this.speedX
+            this.direction = directions["left"]
+            this.walkingAnimation += 0.1;
         }
         if (this.right && this.posX < mapWidth - this.width) {
             this.posX += this.speedX
+            this.direction = directions["right"]
+            this.walkingAnimation += 0.1;
         }
         if (this.up && this.posY > 0) {
             this.posY -= this.speedY
+            this.direction = directions["up"]
+            this.walkingAnimation += 0.1;
         }
         if (this.down && this.posY < mapHeight - this.height) {
             this.posY += this.speedY
+            this.direction = directions["down"]
+            this.walkingAnimation += 0.1;
         }
     }
 }
