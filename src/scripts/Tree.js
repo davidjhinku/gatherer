@@ -11,15 +11,9 @@ class Tree {
     }
 
     drawTree(ctx, offsetX, offsetY) {
-        // ctx.fillStyle = 'brown'
-        // ctx.fillRect(this.posX, this.posY, this.width, this.height)
         let playerOffsetX = Math.floor(this.posX - offsetX - this.width)
         let playerOffsetY = Math.floor(this.posY - offsetY - this.height)
-        // console.log(playerOffsetX)
 
-        // ctx.drawImage(this.tree, this.posX, this.posY, this.width, this.height)
-
-        // ctx.drawImage(this.tree, this.posX, this.posY, this.width, this.height, playerOffsetX, playerOffsetY, this.width, this.height)
         ctx.drawImage(this.tree, 0, 0, this.tree.width, this.tree.height, playerOffsetX, playerOffsetY, this.width, this.height)
     }
 

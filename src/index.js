@@ -7,20 +7,18 @@ import Tree from './scripts/Tree';
 let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext("2d");
 
-//Event Listeners
+////Event Listeners
 document.addEventListener('keydown', keyPressed);
 document.addEventListener('keyup', keyRelease)
 
 
-//Canvas Code
+////For the Canvas
 canvas.width = 1000;
 canvas.height = 700;
 let mapWidth = 2000 * 2;
 let mapHeight = 1500 * 2;
 canvas.style.background = "#52B788"
 ctx.font = '50px Ariel';
-
-ctx.fillText('Henlo', 10, 50);
 
 window.requestAnimationFrame(animate)
 function animate(){
@@ -42,8 +40,7 @@ function objCollision(player, tree) {
     )
 }
 
-//For the map
-// let map = new Map(0, 0)
+////For the map
 let map = new Map(1000, 750)
 function drawMap(){
     let playerOffsetX = canvas.width/2 - player.posX
@@ -51,7 +48,7 @@ function drawMap(){
     map.drawMap(ctx, mapWidth, mapHeight, playerOffsetX, playerOffsetY)
 }
 
-//For the player
+////For the player
 let player = new Player(500, 350)
 player.drawPlayer(ctx)
 
@@ -62,7 +59,7 @@ function updatePlayer() {
     total_trees.forEach((tree) => {
         let collision = objCollision(player, tree);
         if(collision) {
-            console.log('Colliding!')
+            // console.log('Colliding!')
             colliding = true
         }
     })
@@ -113,25 +110,32 @@ function keyRelease(e) {
     }
 }
 
-//For the trees
+////For the trees
 let total_trees = [];
 
 for (let i = 0; i < 100; i++) {
     let randX = Math.floor(Math.random() * mapWidth);
     let randY = Math.floor(Math.random() * mapHeight);
 
+    //to spawn away from edge by size of tree
+    if (randX < 170) {
+        randX += 170
+    }
+    if (randY < 236) {
+        randY += 236
+    }
 
     let constructTree = new Tree(randX, randY, false);
     total_trees.push(constructTree);
     constructTree.drawTree(ctx)
 }
 
+
 function updateTrees(treeArr) {
     let playerOffsetX = player.posX - canvas.width/2
     let playerOffsetY = player.posY - canvas.height/2
 
     treeArr.forEach((tree)=>{
-        // tree.drawTree(ctx)
         tree.drawTree(ctx, playerOffsetX, playerOffsetY)
     })
 }
