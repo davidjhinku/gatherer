@@ -1,10 +1,10 @@
 import './styles/index.scss';
-import Map from './scripts/Map'
+import Map from './scripts/Map';
 import Player from './scripts/Player';
-import Input from './scripts/Input'
+import Input from './scripts/Input';
 import Tree from './scripts/Tree';
 import Basket from './scripts/Basket';
-import Decoration from './scripts/Decoration'
+import Decoration from './scripts/Decoration';
 
 ////Canvas Dimensions
 let canvas = document.getElementById('canvas');
@@ -16,7 +16,7 @@ let mapHeight = 1500 * 2;
 
 ////Objects
 let map = new Map(mapWidth, mapHeight);
-let player = new Player(500, 350);
+let player = new Player(canvas.width/2, canvas.height/2);
 let basket = new Basket();
 new Input(player);
 let total_trees = [];
@@ -67,7 +67,7 @@ function updatePlayer() {
     })
 
     // if (!colliding){
-        player.movePlayer(mapWidth, mapHeight);
+        player.movePlayer(mapWidth, mapHeight, colliding);
         player.drawPlayer(ctx, canvas.width/2, canvas.height/2)
     // }
 }

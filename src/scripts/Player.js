@@ -31,7 +31,7 @@ class Player {
         ctx.clearRect(this.posX, this.posY, this.width, this.height)
     }
 
-    movePlayer(mapWidth, mapHeight) {
+    movePlayer(mapWidth, mapHeight, colliding) {
         let directions = {
             "down": 0,
             "up": 1,
@@ -40,7 +40,9 @@ class Player {
         }
 
         if (this.left && this.posX > 0) {
-            this.posX -= this.speedX
+            if (!colliding){
+                this.posX -= this.speedX
+            }
             this.direction = directions["left"]
             this.walkingAnimation += 0.1;
         }
