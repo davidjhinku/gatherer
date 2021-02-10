@@ -1,15 +1,31 @@
 
 class Tree {
     constructor(posX, posY, fruit) {
+        this.tree = new Image();
+        this.tree.src = this.randomTree();
         this.posX = posX;
         this.posY = posY;
+        this.width = 170;
+        this.height = 236;
         this.fruit = fruit;
     }
 
-    drawTree(ctx) {
-        ctx.fillStyle = 'brown'
-        ctx.fillRect(this.posX, this.posY, 30, 70)
+    drawTree(ctx, offsetX, offsetY) {
+        let playerOffsetX = Math.floor(this.posX - offsetX - this.width)
+        let playerOffsetY = Math.floor(this.posY - offsetY - this.height)
+
+        ctx.drawImage(this.tree, 0, 0, this.tree.width, this.tree.height, playerOffsetX, playerOffsetY, this.width, this.height)
     }
+
+    randomTree(){
+        const sources = [
+            'src/assets/images/trees/Tree-2-2.png',
+            'src/assets/images/trees/Tree-2-3.png',
+            'src/assets/images/trees/Tree-2-4.png'
+        ]
+        
+        return sources[Math.floor(Math.random()*sources.length)]
+    }   
 }
 
 export default Tree;

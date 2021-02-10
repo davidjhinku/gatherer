@@ -1,29 +1,44 @@
 
 class Player {
     constructor(posX, posY) {
+        this.player = new Image();
+        this.player.src = 'src/assets/images/sprite_player.png'
         this.posX = posX;
         this.posY = posY;
+        this.width = 100;
+        this.height = 100;
+        this.speedX = 5;
+        this.speedY = 5
+        this.left = false;
+        this.right = false;
+        this.up = false;
+        this.down = false;
     }
 
-    drawPlayer(ctx){
+    drawPlayer(ctx, width, height){
         ctx.fillStyle = 'blue'
-        ctx.fillRect(this.posX, this.posY, 20, 20)
+        ctx.drawImage(this.player, 0, 0, 32, 32, width, height, this.width, this.height)
+    }
+
+    clearPlayer(ctx) {
+        ctx.clearRect(this.posX, this.posY, this.width, this.height)
+    }
+
+    movePlayer(mapWidth, mapHeight) {
+        if (this.left && this.posX > 0) {
+            this.posX -= this.speedX
+        }
+        if (this.right && this.posX < mapWidth - this.width) {
+            this.posX += this.speedX
+        }
+        if (this.up && this.posY > 0) {
+            this.posY -= this.speedY
+        }
+        if (this.down && this.posY < mapHeight - this.height) {
+            this.posY += this.speedY
+        }
     }
 }
 
-// const playerSprite = new Image()
-// playerSprite.src = '../assets/sprite_player'
-
-// const player = {
-//     x: 0,
-//     y: 0,
-//     width: 32,
-//     heigh: 32,
-//     frameX: 0,
-//     frameY: 0,
-//     speed: 5,
-//     moving: false
-
-// }
 
 export default Player;
