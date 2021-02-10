@@ -113,7 +113,7 @@ function keyRelease(e) {
 ////For the trees
 let total_trees = [];
 
-for (let i = 0; i < 50; i++) {
+for (let i = 0; i < 10; i++) {
     let randX = Math.floor(Math.random() * mapWidth);
     let randY = Math.floor(Math.random() * mapHeight);
 
@@ -130,6 +130,25 @@ for (let i = 0; i < 50; i++) {
     constructTree.drawTree(ctx)
 }
 
+//Fruit Trees
+for (let i = 0; i < 3; i++) {
+    const fruits = ["apple", "orange", "peach"]
+
+    let randX = Math.floor(Math.random() * mapWidth);
+    let randY = Math.floor(Math.random() * mapHeight);
+
+    //to spawn away from edge by size of tree
+    if (randX < 170) {
+        randX += 170
+    }
+    if (randY < 236) {
+        randY += 236
+    }
+
+    let fruitTree = new Tree(randX, randY, true, fruits[i])
+    total_trees.push(fruitTree);
+    fruitTree.drawTree(ctx)
+}
 
 function updateTrees(treeArr) {
     let playerOffsetX = player.posX - canvas.width/2
