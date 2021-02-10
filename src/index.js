@@ -1,24 +1,21 @@
 import './styles/index.scss';
 import Map from './scripts/Map'
 import Player from './scripts/Player';
+import Input from './scripts/Input'
 import Tree from './scripts/Tree';
 
+////Canvas Dimensions
 let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext("2d");
-
-////Event Listeners
-document.addEventListener('keydown', keyPressed);
-document.addEventListener('keyup', keyRelease)
-
-////Canvas Dimensions
 canvas.width = 1000;
 canvas.height = 700;
 let mapWidth = 2000 * 2;
 let mapHeight = 1500 * 2;
 
 ////Objects
-let map = new Map(1000, 750, mapWidth, mapHeight);
+let map = new Map(mapWidth, mapHeight);
 let player = new Player(500, 350);
+new Input(player);
 let total_trees = [];
 
 // canvas.style.background = "#52B788"
@@ -34,7 +31,8 @@ function animate(){
     let playerOffsetX = canvas.width / 2 - player.posX
     let playerOffsetY = canvas.height / 2 - player.posY
     
-    map.drawMap(ctx, playerOffsetX, playerOffsetY);
+    map.updateMap(playerOffsetX, playerOffsetY)
+    map.drawMap(ctx);
     updateTrees(total_trees, playerOffsetX, playerOffsetY);
     // Tree.updateTrees(total_trees, ctx, playerOffsetX, playerOffsetY);
     updatePlayer();
@@ -50,16 +48,7 @@ function objCollision(player, tree) {
     )
 }
 
-////For the map
-// let map = new Map(1000, 750, mapWidth, mapHeight)
-// function drawMap(){
-//     let playerOffsetX = canvas.width/2 - player.posX
-//     let playerOffsetY = canvas.height/2 - player.posY
-//     map.drawMap(ctx, playerOffsetX, playerOffsetY)
-// }
-
 ////For the player
-
 function updatePlayer() {
 
     //Check for tree collision
@@ -76,45 +65,6 @@ function updatePlayer() {
         player.movePlayer(mapWidth, mapHeight);
         player.drawPlayer(ctx, canvas.width/2, canvas.height/2)
     // }
-}
-
-const LEFT_KEY = 37;
-const RIGHT_KEY = 39;
-const UP_KEY = 38;
-const DOWN_KEY = 40;
-
-function keyPressed(e) {
-    switch(e.keyCode){
-        case LEFT_KEY:
-            player.left = true
-            break
-        case RIGHT_KEY:
-            player.right = true
-            break
-        case UP_KEY:
-            player.up = true
-            break
-        case DOWN_KEY:
-            player.down = true
-            break
-    }
-}
-
-function keyRelease(e) {
-    switch (e.keyCode) {
-        case LEFT_KEY:
-            player.left = false
-            break
-        case RIGHT_KEY:
-            player.right = false
-            break
-        case UP_KEY:
-            player.up = false
-            break
-        case DOWN_KEY:
-            player.down = false
-            break
-    }
 }
 
 ////For the trees
@@ -151,4 +101,3 @@ function updateTrees(treeArr, offsetX, offsetY) {
         tree.drawTree(ctx, offsetX, offsetY)
     })
 }
-
