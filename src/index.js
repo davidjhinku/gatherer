@@ -113,7 +113,7 @@ function keyRelease(e) {
 ////For the trees
 let total_trees = [];
 
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 50; i++) {
     let randX = Math.floor(Math.random() * mapWidth);
     let randY = Math.floor(Math.random() * mapHeight);
 
