@@ -12,6 +12,15 @@ class Game {
         this.mapWidth = mapWidth;
         this.mapHeight = mapHeight;
     }
+
+    startGame(){
+        let map = new Map(this.mapWidth, this.mapHeight);
+        let player = new Player(this.canvWidth/2, this.canvHeight/2);
+        let basket = new Basket();
+        new Input(player);
+        let total_trees = [];
+        let decorations = [];
+    }
 }
 
 export default Game;

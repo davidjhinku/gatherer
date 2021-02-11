@@ -45,29 +45,29 @@ function animate(){
     window.requestAnimationFrame(animate)
 }
 
-function objCollision(player, tree) {
-    return (player.posX <= tree.posX &&
-        tree.posX - tree.width <= player.posX + player.width &&
-        player.posY <= tree.posY &&
-        tree.posY - tree.height <= player.posY + player.height
-    )
-}
+// function objCollision(player, tree) {
+//     return (player.posX <= tree.posX &&
+//         tree.posX - tree.width <= player.posX + player.width &&
+//         player.posY <= tree.posY &&
+//         tree.posY - tree.height <= player.posY + player.height
+//     )
+// }
 
 ////For the player
 function updatePlayer() {
 
     //Check for tree collision
-    let colliding
-    total_trees.forEach((tree) => {
-        let collision = objCollision(player, tree);
-        if(collision) {
-            console.log('Colliding!')
-            colliding = true
-        }
-    })
+    // total_trees.forEach((tree) => {
+    //     let collision = objCollision(player, tree);
+    //     if(collision) {
+    //         console.log('Colliding!')
+    //         colliding = true
+    //     }
+    // })  let colliding
+  
 
     // if (!colliding){
-        player.movePlayer(mapWidth, mapHeight, colliding);
+        player.movePlayer(mapWidth, mapHeight, total_trees);
         player.drawPlayer(ctx, canvas.width/2, canvas.height/2)
     // }
 }
