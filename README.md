@@ -1,5 +1,5 @@
 <p align="center"> 
-  <img width="250" height="100.26" src="https://raw.githubusercontent.com/davidjhinku/gatherer/main/src/assets/splash_logo.png">
+  <img width="250" height="100.26" src="https://raw.githubusercontent.com/davidjhinku/gatherer/main/src/assets/readme_logo.png">
 </p>
 
 ## Background and Overview

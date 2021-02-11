@@ -1,5 +1,5 @@
 class Input {
-    constructor(player) {
+    constructor(player, basket, game) {
         document.addEventListener('keydown', e => {
             switch (e.keyCode) {
                 case 37:
@@ -14,8 +14,14 @@ class Input {
                 case 40:
                     player.down = true
                     break
+                case 32:
+                    player.pickFruit(basket)
+                    break
+                case 13:
+                    game.startGame();
+                    break
             }
-
+            // console.log(e.keyCode)
         });
 
         document.addEventListener('keyup', e => {
@@ -31,6 +37,12 @@ class Input {
                     break
                 case 40:
                     player.down = false
+                    break
+                case 32:
+                    if (basket.hasItem(game.goalFruit)) {
+                        game.won()
+                    }
+                    // console.log(basket.items)
                     break
             }
         })

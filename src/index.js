@@ -1,10 +1,5 @@
 import './styles/index.scss';
-import Map from './scripts/Map';
-import Player from './scripts/Player';
-import Input from './scripts/Input';
-import Tree from './scripts/Tree';
-import Basket from './scripts/Basket';
-import Decoration from './scripts/Decoration';
+import Game from './scripts/Game'
 
 ////Canvas Dimensions
 let canvas = document.getElementById('canvas');
@@ -13,14 +8,10 @@ canvas.width = 1000;
 canvas.height = 700;
 let mapWidth = 2000 * 2;
 let mapHeight = 1500 * 2;
+let mapWaterOffset = 400
 
-////Objects
-let map = new Map(mapWidth, mapHeight);
-let player = new Player(canvas.width/2, canvas.height/2);
-let basket = new Basket();
-new Input(player);
-let total_trees = [];
-let decorations = [];
+let game = new Game(canvas.width, canvas.height, mapWidth, mapHeight, mapWaterOffset, ctx);
+// game.startGame(ctx);
 
 // canvas.style.background = "#52B788"
 // ctx.font = '50px Ariel';
@@ -30,100 +21,91 @@ window.requestAnimationFrame(animate)
 function animate(){
     ctx.imageSmoothingEnabled = false;
     ctx.clearRect(0,0,canvas.width,canvas.height)
+    
+    game.updateGame()
+    game.drawGame(ctx)
 
-    //For objects to move around the player
-    let playerOffsetX = canvas.width / 2 - player.posX
-    let playerOffsetY = canvas.height / 2 - player.posY
-    
-    map.updateMap(playerOffsetX, playerOffsetY)
-    map.drawMap(ctx);
-    updateDecorations(decorations, playerOffsetX, playerOffsetY)
-    updateTrees(total_trees, playerOffsetX, playerOffsetY);
-    // Tree.updateTrees(total_trees, ctx, playerOffsetX, playerOffsetY);
-    updatePlayer();
-    
     window.requestAnimationFrame(animate)
 }
 
-// function objCollision(player, tree) {
-//     return (player.posX <= tree.posX &&
-//         tree.posX - tree.width <= player.posX + player.width &&
-//         player.posY <= tree.posY &&
-//         tree.posY - tree.height <= player.posY + player.height
-//     )
+
+
+
+
+//Code to be deleted
+// import Map from './scripts/Map';
+// import Player from './scripts/Player';
+// import Input from './scripts/Input';
+// import Tree from './scripts/Tree';
+// import Basket from './scripts/Basket';
+// import Decoration from './scripts/Decoration';
+// import {randomObjectPosition} from './scripts/Util'
+
+////Objects
+// let map = new Map(mapWidth, mapHeight);
+// let player = new Player(canvas.width/2, canvas.height/2);
+// let basket = new Basket();
+// new Input(player, basket);
+// let total_trees = [];
+// let decorations = [];
+
+    //For objects to move around the player
+    // let playerOffsetX = canvas.width / 2 - player.posX
+    // let playerOffsetY = canvas.height / 2 - player.posY
+    // map.updateMap(playerOffsetX, playerOffsetY)
+    // map.drawMap(ctx);
+    // updateDecorations(decorations, playerOffsetX, playerOffsetY)
+    // updateTrees(total_trees, playerOffsetX, playerOffsetY);
+    // basket.drawBasket(ctx, canvas.width, canvas.height)
+    // // Tree.updateTrees(total_trees, ctx, playerOffsetX, playerOffsetY);
+    // updatePlayer();
+
+    // ////For the player
+// function updatePlayer() {
+//     player.movePlayer(mapWidth, mapHeight, mapWaterOffset, total_trees);
+//     player.drawPlayer(ctx, canvas.width/2, canvas.height/2)
 // }
 
-////For the player
-function updatePlayer() {
+// ////For the trees
+// for (let i = 0; i < 10; i++) {
+//     let randX = randomObjectPosition(player.posX, mapWidth, mapWaterOffset)
+//     let randY = randomObjectPosition(player.posY, mapHeight, mapWaterOffset)
 
-    //Check for tree collision
-    // total_trees.forEach((tree) => {
-    //     let collision = objCollision(player, tree);
-    //     if(collision) {
-    //         console.log('Colliding!')
-    //         colliding = true
-    //     }
-    // })  let colliding
-  
+//     let constructTree = new Tree(randX, randY, false, "");
+//     total_trees.push(constructTree);
+//     constructTree.drawTree(ctx)
+// }
 
-    // if (!colliding){
-        player.movePlayer(mapWidth, mapHeight, total_trees);
-        player.drawPlayer(ctx, canvas.width/2, canvas.height/2)
-    // }
-}
+// //Fruit Trees
+// for (let i = 0; i < 3; i++) {
+//     const fruits = ["apple", "orange", "peach"]
 
-////For the trees
-for (let i = 0; i < 10; i++) {
-    let randX = Math.floor(Math.random() * mapWidth);
-    let randY = Math.floor(Math.random() * mapHeight);
+//     let randX = randomObjectPosition(player.posX, mapWidth, mapWaterOffset)
+//     let randY = randomObjectPosition(player.posY, mapHeight, mapWaterOffset)
 
-    //to spawn away from edge by size of tree
-    if (randX < 170) randX += 170
-    if (randY < 236) randY += 236
+//     let fruitTree = new Tree(randX, randY, true, fruits[i])
+//     total_trees.push(fruitTree);
+//     fruitTree.drawTree(ctx)
+// }
 
-    let constructTree = new Tree(randX, randY, false);
-    total_trees.push(constructTree);
-    constructTree.drawTree(ctx)
-}
+// function updateTrees(treeArr, offsetX, offsetY) {
+//     treeArr.forEach((tree)=>{
+//         tree.drawTree(ctx, offsetX, offsetY)
+//     })
+// }
 
-//Fruit Trees
-for (let i = 0; i < 3; i++) {
-    const fruits = ["apple", "orange", "peach"]
+// ////Decorations
+// for (let i = 0; i < 100; i++) {
+//     let randX = randomObjectPosition(player.posX, mapWidth, mapWaterOffset)
+//     let randY = randomObjectPosition(player.posY, mapHeight, mapWaterOffset)
 
-    let randX = Math.floor(Math.random() * mapWidth);
-    let randY = Math.floor(Math.random() * mapHeight);
+//     let constructDecoration = new Decoration(randX, randY);
+//     decorations.push(constructDecoration);
+//     constructDecoration.drawDecoration(ctx)
+// }
 
-    if (randX < 170) randX += 170
-    if (randY < 236) randY += 236
-
-    let fruitTree = new Tree(randX, randY, true, fruits[i])
-    // let fruitTree = new Tree(310, 300, true, "apple")
-    total_trees.push(fruitTree);
-    fruitTree.drawTree(ctx)
-}
-
-function updateTrees(treeArr, offsetX, offsetY) {
-    treeArr.forEach((tree)=>{
-        tree.drawTree(ctx, offsetX, offsetY)
-    })
-}
-
-//Decorations
-for (let i = 0; i < 100; i++) {
-    let randX = Math.floor(Math.random() * mapWidth);
-    let randY = Math.floor(Math.random() * mapHeight);
-
-    //to spawn away from edge by size of tree
-    if (randX < 170) randX += 170
-    if (randY < 236) randY += 236
-
-    let constructDecoration = new Decoration(randX, randY);
-    decorations.push(constructDecoration);
-    constructDecoration.drawDecoration(ctx)
-}
-
-function updateDecorations(decorationArr, offsetX, offsetY) {
-    decorationArr.forEach((dec) => {
-        dec.drawDecoration(ctx, offsetX, offsetY)
-    })
-}
+// function updateDecorations(decorationArr, offsetX, offsetY) {
+//     decorationArr.forEach((dec) => {
+//         dec.drawDecoration(ctx, offsetX, offsetY)
+//     })
+// }

@@ -1,7 +1,15 @@
 
 class Basket  {
     constructor() {
+        this.basket = new Image();
+        this.basket.src = 'src/assets/images/basket/basket.png'
+        this.width = 120;
+        this.height = 130;
         this.items = []
+    }
+
+    drawBasket(ctx, canvWidth, canvHeight) {
+        ctx.drawImage(this.basket, 0, 0, this.basket.width, this.basket.height, canvWidth-120, canvHeight-720, this.width, this.height)
     }
 
     addItem(fruit) {
@@ -9,7 +17,8 @@ class Basket  {
     }
 
     hasItem(fruit){
-        return !!this.items[fruit]
+        // return !!this.items[fruit]
+        return this.items.includes(fruit)
     }
 }
 

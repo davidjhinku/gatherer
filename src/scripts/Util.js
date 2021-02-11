@@ -41,25 +41,9 @@ export function willCollide(player, trees){
 }
 
 
-// export function willCollide(player, tree) {
-//     let clonePlayer = {...player}
-//     if (clonePlayer.left) {
-//         clonePlayer.posX -= clonePlayer.speedX
-//         // newX = player.posX - player.speedX;
-//     }
-//     if (clonePlayer.right) {
-//         clonePlayer.posX += clonePlayer.speedX
-//         // newX = player.posX + player.speedX;
-//     }
-//     if (clonePlayer.up) {
-//         clonePlayer.posY -= clonePlayer.speedY
-//         // newY = player.posY - player.speedY;
-//     }
-//     if (clonePlayer.down) {
-//         clonePlayer.posY += clonePlayer.speedY
-//         // newY = player.posY - player.speedY;
-//     }
-//     // console.log(player)
-//     // console.log(clonePlayer)
-//     return objCollision(clonePlayer, tree)
-// }
+export function randomObjectPosition(playerStartPos, mapSize, waterOffset) {
+    let min = playerStartPos + 150;
+    let max = mapSize - waterOffset;
+
+    return Math.floor((Math.random() * (max-min)) + min)
+}
