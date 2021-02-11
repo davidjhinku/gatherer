@@ -5,6 +5,7 @@ import Input from './scripts/Input';
 import Tree from './scripts/Tree';
 import Basket from './scripts/Basket';
 import Decoration from './scripts/Decoration';
+import {randomObjectPosition} from './scripts/Util'
 
 ////Canvas Dimensions
 let canvas = document.getElementById('canvas');
@@ -13,12 +14,13 @@ canvas.width = 1000;
 canvas.height = 700;
 let mapWidth = 2000 * 2;
 let mapHeight = 1500 * 2;
+let mapWaterOffset = 400
 
 ////Objects
 let map = new Map(mapWidth, mapHeight);
 let player = new Player(canvas.width/2, canvas.height/2);
 let basket = new Basket();
-new Input(player);
+new Input(player, basket);
 let total_trees = [];
 let decorations = [];
 
@@ -42,34 +44,23 @@ function animate(){
     basket.drawBasket(ctx, canvas.width, canvas.height)
     // Tree.updateTrees(total_trees, ctx, playerOffsetX, playerOffsetY);
     updatePlayer();
-    
+
     window.requestAnimationFrame(animate)
 }
 
-// function objCollision(player, tree) {
-//     return (player.posX <= tree.posX &&
-//         tree.posX - tree.width <= player.posX + player.width &&
-//         player.posY <= tree.posY &&
-//         tree.posY - tree.height <= player.posY + player.height
-//     )
-// }
 
 ////For the player
 function updatePlayer() {
-    player.movePlayer(mapWidth, mapHeight, total_trees);
+    player.movePlayer(mapWidth, mapHeight, mapWaterOffset, total_trees);
     player.drawPlayer(ctx, canvas.width/2, canvas.height/2)
 }
 
 ////For the trees
 for (let i = 0; i < 10; i++) {
-    let randX = Math.floor(Math.random() * mapWidth);
-    let randY = Math.floor(Math.random() * mapHeight);
+    let randX = randomObjectPosition(player.posX, mapWidth, mapWaterOffset)
+    let randY = randomObjectPosition(player.posY, mapHeight, mapWaterOffset)
 
-    //to spawn away from edge by size of tree
-    if (randX < 170) randX += 170
-    if (randY < 236) randY += 236
-
-    let constructTree = new Tree(randX, randY, false);
+    let constructTree = new Tree(randX, randY, false, "");
     total_trees.push(constructTree);
     constructTree.drawTree(ctx)
 }
@@ -78,14 +69,10 @@ for (let i = 0; i < 10; i++) {
 for (let i = 0; i < 3; i++) {
     const fruits = ["apple", "orange", "peach"]
 
-    let randX = Math.floor(Math.random() * mapWidth);
-    let randY = Math.floor(Math.random() * mapHeight);
-
-    if (randX < 170) randX += 170
-    if (randY < 236) randY += 236
+    let randX = randomObjectPosition(player.posX, mapWidth, mapWaterOffset)
+    let randY = randomObjectPosition(player.posY, mapHeight, mapWaterOffset)
 
     let fruitTree = new Tree(randX, randY, true, fruits[i])
-    // let fruitTree = new Tree(310, 300, true, "apple")
     total_trees.push(fruitTree);
     fruitTree.drawTree(ctx)
 }
@@ -98,12 +85,8 @@ function updateTrees(treeArr, offsetX, offsetY) {
 
 ////Decorations
 for (let i = 0; i < 100; i++) {
-    let randX = Math.floor(Math.random() * mapWidth);
-    let randY = Math.floor(Math.random() * mapHeight);
-
-    //to spawn away from edge 
-    if (randX < 100) randX += 100
-    if (randY < 100) randY += 100
+    let randX = randomObjectPosition(player.posX, mapWidth, mapWaterOffset)
+    let randY = randomObjectPosition(player.posY, mapHeight, mapWaterOffset)
 
     let constructDecoration = new Decoration(randX, randY);
     decorations.push(constructDecoration);

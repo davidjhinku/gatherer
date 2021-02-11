@@ -18,7 +18,7 @@ class Input {
                     player.pickFruit()
                     break
             }
-            console.log(e.keyCode)
+            // console.log(e.keyCode)
         });
 
         document.addEventListener('keyup', e => {

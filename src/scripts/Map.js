@@ -1,7 +1,7 @@
 class Map {
     constructor(width, height) {
         this.map = new Image();
-        this.map.src = 'src/assets/images/map/map_background.jpg';
+        this.map.src = 'src/assets/images/map/map_background2.jpg';
         this.posX = 0;
         this.posY = 0;
         this.width = width;

@@ -14,6 +14,7 @@ class Player {
         this.direction = 0;
         this.walkingAnimation = 0;
         // this.isColliding = false;
+        this.treeTouching = {}
         this.left = false;
         this.right = false;
         this.up = false;
@@ -34,7 +35,7 @@ class Player {
         ctx.clearRect(this.posX, this.posY, this.width, this.height)
     }
 
-    movePlayer(mapWidth, mapHeight, trees) {
+    movePlayer(mapWidth, mapHeight, waterOffset, trees) {
         let directions = {
             "down": 0,
             "up": 1,
@@ -43,44 +44,53 @@ class Player {
         }
 
         // this.isColliding = false
+        // console.log(this.treeTouching)
         
-        if (this.left && this.posX > 0) {
+        if (this.left && this.posX > waterOffset) {
             let {collision, treeCollision} = willCollide(this, trees)
             // console.log(collision);
             if (!collision) {
                 this.posX -= this.speedX
+                this.treeTouching = {}
             } else {
-                console.log(treeCollision)
+                // console.log(treeCollision)
+                this.treeTouching = treeCollision
             }
             this.direction = directions["left"]
             this.walkingAnimation += 0.1;
         }
-        if (this.right && this.posX < mapWidth - this.width) {
+        if (this.right && this.posX < mapWidth - this.width - waterOffset) {
             let { collision, treeCollision } = willCollide(this, trees)
             if (!collision) {
                 this.posX += this.speedX
+                this.treeTouching = {}
             } else {
-                console.log(treeCollision)
+                // console.log(treeCollision)
+                this.treeTouching = treeCollision
             }
             this.direction = directions["right"]
             this.walkingAnimation += 0.1;
         }
-        if (this.up && this.posY > 0) {
+        if (this.up && this.posY > waterOffset - 100) {
             let { collision, treeCollision } = willCollide(this, trees)
             if (!collision) {
                 this.posY -= this.speedY
+                this.treeTouching = {}
             } else {
-                console.log(treeCollision)
+                // console.log(treeCollision)
+                this.treeTouching = treeCollision
             }
             this.direction = directions["up"]
             this.walkingAnimation += 0.1;
         }
-        if (this.down && this.posY < mapHeight - this.height) {
+        if (this.down && this.posY < mapHeight - this.height - waterOffset) {
             let { collision, treeCollision } = willCollide(this, trees)
             if (!collision) {
                 this.posY += this.speedY
+                this.treeTouching = {}
             } else {
-                console.log(treeCollision)
+                // console.log(treeCollision)
+                this.treeTouching = treeCollision
             }
             this.direction = directions["down"]
             this.walkingAnimation += 0.1;
