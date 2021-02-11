@@ -1,3 +1,5 @@
+import {objCollision, willCollide} from './Util'
+
 
 class Player {
     constructor(posX, posY) {
@@ -11,10 +13,15 @@ class Player {
         this.speedY = 5
         this.direction = 0;
         this.walkingAnimation = 0;
+        this.isColliding = false;
         this.left = false;
+        this.leftCollision = false;
         this.right = false;
+        this.rightCollision = false;
         this.up = false;
+        this.upCollision = false;
         this.down = false;
+        this.downCollision = false;
     }
 
     drawPlayer(ctx, width, height){
@@ -31,7 +38,7 @@ class Player {
         ctx.clearRect(this.posX, this.posY, this.width, this.height)
     }
 
-    movePlayer(mapWidth, mapHeight) {
+    movePlayer(mapWidth, mapHeight, trees) {
         let directions = {
             "down": 0,
             "up": 1,
@@ -39,23 +46,46 @@ class Player {
             "right": 3
         }
 
+        this.isColliding = false
+        
         if (this.left && this.posX > 0) {
-            this.posX -= this.speedX
+            let {collision, treeCollision} = willCollide(this, trees)
+            // console.log(collision);
+            if (!collision) {
+                this.posX -= this.speedX
+            } else {
+                console.log(treeCollision)
+            }
             this.direction = directions["left"]
             this.walkingAnimation += 0.1;
         }
         if (this.right && this.posX < mapWidth - this.width) {
-            this.posX += this.speedX
+            let { collision, treeCollision } = willCollide(this, trees)
+            if (!collision) {
+                this.posX += this.speedX
+            } else {
+                console.log(treeCollision)
+            }
             this.direction = directions["right"]
             this.walkingAnimation += 0.1;
         }
         if (this.up && this.posY > 0) {
-            this.posY -= this.speedY
+            let { collision, treeCollision } = willCollide(this, trees)
+            if (!collision) {
+                this.posY -= this.speedY
+            } else {
+                console.log(treeCollision)
+            }
             this.direction = directions["up"]
             this.walkingAnimation += 0.1;
         }
         if (this.down && this.posY < mapHeight - this.height) {
-            this.posY += this.speedY
+            let { collision, treeCollision } = willCollide(this, trees)
+            if (!collision) {
+                this.posY += this.speedY
+            } else {
+                console.log(treeCollision)
+            }
             this.direction = directions["down"]
             this.walkingAnimation += 0.1;
         }

@@ -1,14 +1,22 @@
 class Map {
-    constructor(posX, posY) {
+    constructor(width, height) {
         this.map = new Image();
         this.map.src = 'src/assets/images/map/map_background.jpg';
-        this.posX = posX;
-        this.posY = posY;
+        this.posX = 0;
+        this.posY = 0;
+        this.width = width;
+        this.height = height
     }
 
-    drawMap(ctx, width, height, offsetX, offsetY) {
-        ctx.drawImage(this.map, 0, 0, this.map.width, this.map.height, offsetX, offsetY, width, height)
+    drawMap(ctx) {
+        ctx.drawImage(this.map, 0, 0, this.map.width, this.map.height, this.posX, this.posY, this.width, this.height)
     }
+
+    updateMap(offsetX, offsetY){
+        this.posX = offsetX;
+        this.posY = offsetY
+    }
+
 }
 
 export default Map;

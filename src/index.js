@@ -1,173 +1,129 @@
 import './styles/index.scss';
-import Map from './scripts/Map'
+import Map from './scripts/Map';
 import Player from './scripts/Player';
+import Input from './scripts/Input';
 import Tree from './scripts/Tree';
+import Basket from './scripts/Basket';
+import Decoration from './scripts/Decoration';
 
-
+////Canvas Dimensions
 let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext("2d");
-
-////Event Listeners
-document.addEventListener('keydown', keyPressed);
-document.addEventListener('keyup', keyRelease)
-
-
-////For the Canvas
 canvas.width = 1000;
 canvas.height = 700;
 let mapWidth = 2000 * 2;
 let mapHeight = 1500 * 2;
-canvas.style.background = "#52B788"
-ctx.font = '50px Ariel';
 
+////Objects
+let map = new Map(mapWidth, mapHeight);
+let player = new Player(canvas.width/2, canvas.height/2);
+let basket = new Basket();
+new Input(player);
+let total_trees = [];
+let decorations = [];
+
+// canvas.style.background = "#52B788"
+// ctx.font = '50px Ariel';
+// setInterval(animate, 1000)
 window.requestAnimationFrame(animate)
+
 function animate(){
     ctx.imageSmoothingEnabled = false;
     ctx.clearRect(0,0,canvas.width,canvas.height)
 
-    drawMap();
-    updateTrees(total_trees);
+    //For objects to move around the player
+    let playerOffsetX = canvas.width / 2 - player.posX
+    let playerOffsetY = canvas.height / 2 - player.posY
+    
+    map.updateMap(playerOffsetX, playerOffsetY)
+    map.drawMap(ctx);
+    updateDecorations(decorations, playerOffsetX, playerOffsetY)
+    updateTrees(total_trees, playerOffsetX, playerOffsetY);
+    // Tree.updateTrees(total_trees, ctx, playerOffsetX, playerOffsetY);
     updatePlayer();
-
+    
     window.requestAnimationFrame(animate)
 }
 
-function objCollision(player, tree) {
-    return (player.posX <= tree.posX + tree.width &&
-        tree.posX <= player.posX + player.width &&
-        player.posY <= tree.posY + tree.height &&
-        tree.posY <= player.posY + player.height
-    )
-}
-
-////For the map
-let map = new Map(1000, 750)
-function drawMap(){
-    let playerOffsetX = canvas.width/2 - player.posX
-    let playerOffsetY = canvas.height/2 - player.posY
-    map.drawMap(ctx, mapWidth, mapHeight, playerOffsetX, playerOffsetY)
-}
+// function objCollision(player, tree) {
+//     return (player.posX <= tree.posX &&
+//         tree.posX - tree.width <= player.posX + player.width &&
+//         player.posY <= tree.posY &&
+//         tree.posY - tree.height <= player.posY + player.height
+//     )
+// }
 
 ////For the player
-let player = new Player(500, 350)
-player.drawPlayer(ctx)
-
 function updatePlayer() {
 
     //Check for tree collision
-    let colliding
-    total_trees.forEach((tree) => {
-        let collision = objCollision(player, tree);
-        if(collision) {
-            // console.log('Colliding!')
-            colliding = true
-        }
-    })
+    // total_trees.forEach((tree) => {
+    //     let collision = objCollision(player, tree);
+    //     if(collision) {
+    //         console.log('Colliding!')
+    //         colliding = true
+    //     }
+    // })  let colliding
+  
 
     // if (!colliding){
-        // player.clearPlayer(ctx)
-        player.movePlayer(mapWidth, mapHeight);
+        player.movePlayer(mapWidth, mapHeight, total_trees);
         player.drawPlayer(ctx, canvas.width/2, canvas.height/2)
     // }
 }
 
-const LEFT_KEY = 37;
-const RIGHT_KEY = 39;
-const UP_KEY = 38;
-const DOWN_KEY = 40;
-
-function keyPressed(e) {
-    switch(e.keyCode){
-        case LEFT_KEY:
-            player.left = true
-            break
-        case RIGHT_KEY:
-            player.right = true
-            break
-        case UP_KEY:
-            player.up = true
-            break
-        case DOWN_KEY:
-            player.down = true
-            break
-    }
-}
-
-function keyRelease(e) {
-    switch (e.keyCode) {
-        case LEFT_KEY:
-            player.left = false
-            break
-        case RIGHT_KEY:
-            player.right = false
-            break
-        case UP_KEY:
-            player.up = false
-            break
-        case DOWN_KEY:
-            player.down = false
-            break
-    }
-}
-
 ////For the trees
-let total_trees = [];
-
-for (let i = 0; i < 50; i++) {
+for (let i = 0; i < 10; i++) {
     let randX = Math.floor(Math.random() * mapWidth);
     let randY = Math.floor(Math.random() * mapHeight);
 
     //to spawn away from edge by size of tree
-    if (randX < 170) {
-        randX += 170
-    }
-    if (randY < 236) {
-        randY += 236
-    }
+    if (randX < 170) randX += 170
+    if (randY < 236) randY += 236
 
     let constructTree = new Tree(randX, randY, false);
     total_trees.push(constructTree);
     constructTree.drawTree(ctx)
 }
 
+//Fruit Trees
+for (let i = 0; i < 3; i++) {
+    const fruits = ["apple", "orange", "peach"]
 
-function updateTrees(treeArr) {
-    let playerOffsetX = player.posX - canvas.width/2
-    let playerOffsetY = player.posY - canvas.height/2
+    let randX = Math.floor(Math.random() * mapWidth);
+    let randY = Math.floor(Math.random() * mapHeight);
 
+    if (randX < 170) randX += 170
+    if (randY < 236) randY += 236
+
+    let fruitTree = new Tree(randX, randY, true, fruits[i])
+    // let fruitTree = new Tree(310, 300, true, "apple")
+    total_trees.push(fruitTree);
+    fruitTree.drawTree(ctx)
+}
+
+function updateTrees(treeArr, offsetX, offsetY) {
     treeArr.forEach((tree)=>{
-        tree.drawTree(ctx, playerOffsetX, playerOffsetY)
+        tree.drawTree(ctx, offsetX, offsetY)
     })
 }
 
+//Decorations
+for (let i = 0; i < 100; i++) {
+    let randX = Math.floor(Math.random() * mapWidth);
+    let randY = Math.floor(Math.random() * mapHeight);
 
+    //to spawn away from edge by size of tree
+    if (randX < 170) randX += 170
+    if (randY < 236) randY += 236
 
-// const playerSprite = new Image()
-// playerSprite.onload = function(){
-//     // ctx.drawImage(playerSprite, 50, 50)
-//     drawSprite(playerSprite, 0, 0)
-// }
-// playerSprite.src = '../../dist/images/sprite_player.png'
-// // ctx.drawImage(playerSprite, 50, 50)
+    let constructDecoration = new Decoration(randX, randY);
+    decorations.push(constructDecoration);
+    constructDecoration.drawDecoration(ctx)
+}
 
-// const player = {
-//     x: 0,
-//     y: 0,
-//     width: 32,
-//     height: 32,
-//     frameX: 0,
-//     frameY: 0,
-//     speed: 5,
-//     moving: false
-// }
-
-// function drawSprite(img, srcX, srcY, srcWidth, srcHeight, destX, destY, destWidth, destHeight) {
-//     ctx.drawImage(img, srcX, srcY, srcWidth, srcHeight, destX, destY, destWidth, destHeight)
-// }
-
-// function animate() {
-//     ctx.clearRect(0,0, canvas.width, canvas.height)
-//     drawSprite(playerSprite, 0, 0, player.width, player.height, 0, 0, player.width, player.height)
-//     requestAnimationFrame(animate)
-// }
-// animate()
+function updateDecorations(decorationArr, offsetX, offsetY) {
+    decorationArr.forEach((dec) => {
+        dec.drawDecoration(ctx, offsetX, offsetY)
+    })
+}
