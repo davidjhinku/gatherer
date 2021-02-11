@@ -1,11 +1,4 @@
 import './styles/index.scss';
-// import Map from './scripts/Map';
-// import Player from './scripts/Player';
-// import Input from './scripts/Input';
-// import Tree from './scripts/Tree';
-// import Basket from './scripts/Basket';
-// import Decoration from './scripts/Decoration';
-// import {randomObjectPosition} from './scripts/Util'
 import Game from './scripts/Game'
 
 ////Canvas Dimensions
@@ -17,15 +10,8 @@ let mapWidth = 2000 * 2;
 let mapHeight = 1500 * 2;
 let mapWaterOffset = 400
 
-////Objects
-// let map = new Map(mapWidth, mapHeight);
-// let player = new Player(canvas.width/2, canvas.height/2);
-// let basket = new Basket();
-// new Input(player, basket);
-// let total_trees = [];
-// let decorations = [];
-let game = new Game(canvas.width, canvas.height, mapWidth, mapHeight, mapWaterOffset);
-game.startGame(ctx);
+let game = new Game(canvas.width, canvas.height, mapWidth, mapHeight, mapWaterOffset, ctx);
+// game.startGame(ctx);
 
 // canvas.style.background = "#52B788"
 // ctx.font = '50px Ariel';
@@ -35,14 +21,37 @@ window.requestAnimationFrame(animate)
 function animate(){
     ctx.imageSmoothingEnabled = false;
     ctx.clearRect(0,0,canvas.width,canvas.height)
+    
+    game.updateGame()
+    game.drawGame(ctx)
+
+    window.requestAnimationFrame(animate)
+}
+
+
+
+
+
+//Code to be deleted
+// import Map from './scripts/Map';
+// import Player from './scripts/Player';
+// import Input from './scripts/Input';
+// import Tree from './scripts/Tree';
+// import Basket from './scripts/Basket';
+// import Decoration from './scripts/Decoration';
+// import {randomObjectPosition} from './scripts/Util'
+
+////Objects
+// let map = new Map(mapWidth, mapHeight);
+// let player = new Player(canvas.width/2, canvas.height/2);
+// let basket = new Basket();
+// new Input(player, basket);
+// let total_trees = [];
+// let decorations = [];
 
     //For objects to move around the player
     // let playerOffsetX = canvas.width / 2 - player.posX
     // let playerOffsetY = canvas.height / 2 - player.posY
-
-    game.updateGame()
-    game.drawGame(ctx)
-    
     // map.updateMap(playerOffsetX, playerOffsetY)
     // map.drawMap(ctx);
     // updateDecorations(decorations, playerOffsetX, playerOffsetY)
@@ -51,11 +60,7 @@ function animate(){
     // // Tree.updateTrees(total_trees, ctx, playerOffsetX, playerOffsetY);
     // updatePlayer();
 
-    window.requestAnimationFrame(animate)
-}
-
-
-// ////For the player
+    // ////For the player
 // function updatePlayer() {
 //     player.movePlayer(mapWidth, mapHeight, mapWaterOffset, total_trees);
 //     player.drawPlayer(ctx, canvas.width/2, canvas.height/2)
