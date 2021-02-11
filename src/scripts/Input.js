@@ -21,7 +21,7 @@ class Input {
                     game.startGame();
                     break
             }
-            console.log(e.keyCode)
+            // console.log(e.keyCode)
         });
 
         document.addEventListener('keyup', e => {
@@ -39,8 +39,10 @@ class Input {
                     player.down = false
                     break
                 case 32:
-                    //some method to check if picked fruit is mission fruit
-                    console.log(basket.items)
+                    if (basket.hasItem(game.goalFruit)) {
+                        game.won()
+                    }
+                    // console.log(basket.items)
                     break
             }
         })

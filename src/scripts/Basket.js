@@ -9,7 +9,6 @@ class Basket  {
     }
 
     drawBasket(ctx, canvWidth, canvHeight) {
-
         ctx.drawImage(this.basket, 0, 0, this.basket.width, this.basket.height, canvWidth-120, canvHeight-720, this.width, this.height)
     }
 
@@ -18,7 +17,8 @@ class Basket  {
     }
 
     hasItem(fruit){
-        return !!this.items[fruit]
+        // return !!this.items[fruit]
+        return this.items.includes(fruit)
     }
 }
 

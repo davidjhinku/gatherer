@@ -12,6 +12,12 @@ const GAMESTATUS = {
     WON: 2
 }
 
+const FRUITS = [
+    "apple",
+    "orange",
+    "peach"
+]
+
 class Game {
     constructor(canvasWidth, canvasHeight, mapWidth, mapHeight, mapWaterOffset, ctx) {
         this.canvasWidth = canvasWidth;
@@ -31,14 +37,22 @@ class Game {
 
     startGame(ctx){
         this.gameStatus = GAMESTATUS.PLAYING;
+        this.goalFruit = FRUITS[Math.floor(Math.random()*FRUITS.length)]
+        console.log(this.goalFruit)
     }
 
     drawGame(ctx) {
         if (this.gameStatus === GAMESTATUS.START_SCREEN) {
+            let start_screen = new Image()
+            start_screen.src = "src/assets/images/start_screen.png"
+            ctx.drawImage(start_screen, 0, 0, start_screen.width, start_screen.height)
+            return
+        } else if (this.gameStatus === GAMESTATUS.WON) {
             ctx.rect(0,0, this.canvasWidth, this.canvasHeight);
-            ctx.fillStyle = "rgba(0, 0, 0, 1)"
+            ctx.fillStyle = "black"
             ctx.fill();
             return
+            // console.log('WINNDER')
         }
 
         let playerOffsetX = this.canvasWidth / 2 - this.player.posX
@@ -47,19 +61,23 @@ class Game {
         this.map.drawMap(ctx);
         this.drawDecorations(this.decorations, playerOffsetX, playerOffsetY, ctx)
         this.drawTrees(this.total_trees, playerOffsetX, playerOffsetY, ctx)
-        // this.basket.drawBasket(ctx, this.canvasWidth, this.canvasHeight)
+        this.basket.drawBasket(ctx, this.canvasWidth, this.canvasHeight)
         this.player.drawPlayer(ctx, this.canvasWidth/2, this.canvasHeight/2)
 
     }
 
     updateGame() {
-        if (this.gameStatus === GAMESTATUS.START_SCREEN) return;
+        if (this.gameStatus === GAMESTATUS.START_SCREEN || this.gameStatus === GAMESTATUS.WON) return;
 
         let playerOffsetX = canvas.width / 2 - this.player.posX
         let playerOffsetY = canvas.height / 2 - this.player.posY
 
         this.map.updateMap(playerOffsetX, playerOffsetY)
         this.player.movePlayer(this.mapWidth, this.mapHeight, this.mapWaterOffset, this.total_trees)
+    }
+
+    won() {
+        this.gameStatus = GAMESTATUS.WON
     }
 
     createMapObjects(ctx) {
@@ -75,12 +93,10 @@ class Game {
 
         //Fruit Trees
         for (let i = 0; i < 3; i++) {
-            const fruits = ["apple", "orange", "peach"]
-
             let randX = randomObjectPosition(this.player.posX, this.mapWidth, this.mapWaterOffset)
             let randY = randomObjectPosition(this.player.posY, this.mapHeight, this.mapWaterOffset)
 
-            let fruitTree = new Tree(randX, randY, true, fruits[i])
+            let fruitTree = new Tree(randX, randY, true, FRUITS[i])
             this.total_trees.push(fruitTree);
             fruitTree.drawTree(ctx)
         }
