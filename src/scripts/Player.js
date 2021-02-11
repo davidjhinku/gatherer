@@ -13,7 +13,6 @@ class Player {
         this.speedY = 5
         this.direction = 0;
         this.walkingAnimation = 0;
-        // this.isColliding = false;
         this.treeTouching = {}
         this.left = false;
         this.right = false;
@@ -46,7 +45,7 @@ class Player {
         // this.isColliding = false
         // console.log(this.treeTouching)
         
-        if (this.left && this.posX > waterOffset) {
+        if (this.left && this.posX > waterOffset+100) {
             let {collision, treeCollision} = willCollide(this, trees)
             // console.log(collision);
             if (!collision) {
@@ -71,7 +70,7 @@ class Player {
             this.direction = directions["right"]
             this.walkingAnimation += 0.1;
         }
-        if (this.up && this.posY > waterOffset - 100) {
+        if (this.up && this.posY > waterOffset) {
             let { collision, treeCollision } = willCollide(this, trees)
             if (!collision) {
                 this.posY -= this.speedY
@@ -97,8 +96,10 @@ class Player {
         }
     }
 
-    pickFruit() {
-         
+    pickFruit(basket) {
+        if (this.treeTouching.hasFruit) {
+            basket.addItem(this.treeTouching.fruit)
+        }
     }
 }
 

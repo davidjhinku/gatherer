@@ -1,5 +1,5 @@
 class Input {
-    constructor(player) {
+    constructor(player, basket) {
         document.addEventListener('keydown', e => {
             switch (e.keyCode) {
                 case 37:
@@ -15,7 +15,7 @@ class Input {
                     player.down = true
                     break
                 case 32:
-                    player.pickFruit()
+                    player.pickFruit(basket)
                     break
             }
             // console.log(e.keyCode)
@@ -37,6 +37,7 @@ class Input {
                     break
                 case 32:
                     //some method to check if picked fruit is mission fruit
+                    console.log(basket.items)
                     break
             }
         })
