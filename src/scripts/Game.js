@@ -48,9 +48,9 @@ class Game {
             ctx.drawImage(start_screen, 0, 0, start_screen.width, start_screen.height)
             return
         } else if (this.gameStatus === GAMESTATUS.WON) {
-            ctx.rect(0,0, this.canvasWidth, this.canvasHeight);
-            ctx.fillStyle = "black"
-            ctx.fill();
+            let end_screen = new Image()
+            end_screen.src = "src/assets/images/end_screen.png"
+            ctx.drawImage(end_screen, 0, 0, end_screen.width, end_screen.height)
             return
             // console.log('WINNDER')
         }
