@@ -13,15 +13,11 @@ class Player {
         this.speedY = 5
         this.direction = 0;
         this.walkingAnimation = 0;
-        this.isColliding = false;
+        // this.isColliding = false;
         this.left = false;
-        this.leftCollision = false;
         this.right = false;
-        this.rightCollision = false;
         this.up = false;
-        this.upCollision = false;
         this.down = false;
-        this.downCollision = false;
     }
 
     drawPlayer(ctx, width, height){
@@ -46,7 +42,7 @@ class Player {
             "right": 3
         }
 
-        this.isColliding = false
+        // this.isColliding = false
         
         if (this.left && this.posX > 0) {
             let {collision, treeCollision} = willCollide(this, trees)
@@ -89,6 +85,10 @@ class Player {
             this.direction = directions["down"]
             this.walkingAnimation += 0.1;
         }
+    }
+
+    pickFruit() {
+         
     }
 }
 

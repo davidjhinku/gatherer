@@ -14,8 +14,11 @@ class Input {
                 case 40:
                     player.down = true
                     break
+                case 32:
+                    player.pickFruit()
+                    break
             }
-
+            console.log(e.keyCode)
         });
 
         document.addEventListener('keyup', e => {
@@ -31,6 +34,9 @@ class Input {
                     break
                 case 40:
                     player.down = false
+                    break
+                case 32:
+                    //some method to check if picked fruit is mission fruit
                     break
             }
         })

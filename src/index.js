@@ -39,6 +39,7 @@ function animate(){
     map.drawMap(ctx);
     updateDecorations(decorations, playerOffsetX, playerOffsetY)
     updateTrees(total_trees, playerOffsetX, playerOffsetY);
+    basket.drawBasket(ctx, canvas.width, canvas.height)
     // Tree.updateTrees(total_trees, ctx, playerOffsetX, playerOffsetY);
     updatePlayer();
     
@@ -55,21 +56,8 @@ function animate(){
 
 ////For the player
 function updatePlayer() {
-
-    //Check for tree collision
-    // total_trees.forEach((tree) => {
-    //     let collision = objCollision(player, tree);
-    //     if(collision) {
-    //         console.log('Colliding!')
-    //         colliding = true
-    //     }
-    // })  let colliding
-  
-
-    // if (!colliding){
-        player.movePlayer(mapWidth, mapHeight, total_trees);
-        player.drawPlayer(ctx, canvas.width/2, canvas.height/2)
-    // }
+    player.movePlayer(mapWidth, mapHeight, total_trees);
+    player.drawPlayer(ctx, canvas.width/2, canvas.height/2)
 }
 
 ////For the trees
@@ -108,14 +96,14 @@ function updateTrees(treeArr, offsetX, offsetY) {
     })
 }
 
-//Decorations
+////Decorations
 for (let i = 0; i < 100; i++) {
     let randX = Math.floor(Math.random() * mapWidth);
     let randY = Math.floor(Math.random() * mapHeight);
 
-    //to spawn away from edge by size of tree
-    if (randX < 170) randX += 170
-    if (randY < 236) randY += 236
+    //to spawn away from edge 
+    if (randX < 100) randX += 100
+    if (randY < 100) randY += 100
 
     let constructDecoration = new Decoration(randX, randY);
     decorations.push(constructDecoration);
