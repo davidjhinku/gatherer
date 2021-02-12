@@ -20,9 +20,10 @@ soundIcon.src = 'src/assets/images/util/mute.png'
 document.addEventListener('click', e => {
     const mousePos = {
         posX: e.clientX,
-        posY: e.clientX
+        posY: e.clientY
     }
-    if (mousePos.posX > 975 && mousePos.posY > 975) {
+    if (mousePos.posX > 915 && mousePos.posX < 960 &&
+        mousePos.posY > 705 && mousePos.posY < 750) {
         muted = !muted
         if (!muted) {
             soundIcon.src = 'src/assets/images/util/sound.png'
@@ -32,7 +33,6 @@ document.addEventListener('click', e => {
             gameBGM.pause();
             startBGM.pause();
         }
-        console.log('HIT BUTTON')
     }
 })
 
