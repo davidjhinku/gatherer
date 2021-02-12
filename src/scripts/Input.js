@@ -39,7 +39,7 @@ class Input {
                     player.down = false
                     break
                 case 32:
-                    if (basket.hasItem(game.goalFruit)) {
+                    if (basket.hasItem(game.goalFruit.name)) {
                         game.won()
                     }
                     // console.log(basket.items)

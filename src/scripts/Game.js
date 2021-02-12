@@ -37,8 +37,19 @@ class Game {
 
     startGame(ctx){
         this.gameStatus = GAMESTATUS.PLAYING;
-        this.goalFruit = FRUITS[Math.floor(Math.random()*FRUITS.length)]
-        console.log(this.goalFruit)
+        this.basket.emptyBasket();
+        // this.total_trees = [];
+        // this.createMapObjects(ctx);
+
+        let randFruit = FRUITS[Math.floor(Math.random() * FRUITS.length)]
+        let randFruitImg = new Image();
+        randFruitImg.src = `src/assets/images/fruits/${randFruit}.png`
+
+        this.goalFruit = {
+            name: randFruit,
+            image: randFruitImg
+        }
+        // console.log(this.goalFruit)
     }
 
     drawGame(ctx) {
@@ -61,7 +72,7 @@ class Game {
         this.map.drawMap(ctx);
         this.drawDecorations(this.decorations, playerOffsetX, playerOffsetY, ctx)
         this.drawTrees(this.total_trees, playerOffsetX, playerOffsetY, ctx)
-        this.basket.drawBasket(ctx, this.canvasWidth, this.canvasHeight)
+        this.basket.drawBasket(ctx, this.canvasWidth, this.canvasHeight, this.goalFruit)
         this.player.drawPlayer(ctx, this.canvasWidth/2, this.canvasHeight/2)
 
     }
