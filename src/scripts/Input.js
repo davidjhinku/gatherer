@@ -1,3 +1,5 @@
+import {playMusic} from '../index'
+
 class Input {
     constructor(player, basket, game) {
         document.addEventListener('keydown', e => {
@@ -19,9 +21,9 @@ class Input {
                     break
                 case 13:
                     game.startGame();
+                    playMusic();
                     break
             }
-            // console.log(e.keyCode)
         });
 
         document.addEventListener('keyup', e => {
@@ -41,8 +43,8 @@ class Input {
                 case 32:
                     if (basket.hasItem(game.goalFruit.name)) {
                         game.won()
+                        playMusic()
                     }
-                    // console.log(basket.items)
                     break
             }
         })

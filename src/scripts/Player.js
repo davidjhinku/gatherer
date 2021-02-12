@@ -21,8 +21,6 @@ class Player {
     }
 
     drawPlayer(ctx, width, height){
-        // ctx.fillStyle = 'blue'
-
         let spriteWidth = this.player.width / 4
         let spriteHeight = this.player.height / 4
         let spriteAnimation = Math.floor(this.walkingAnimation % 4)
@@ -41,18 +39,13 @@ class Player {
             "left": 2,
             "right": 3
         }
-
-        // this.isColliding = false
-        // console.log(this.treeTouching)
         
         if (this.left && this.posX > waterOffset+100) {
             let {collision, treeCollision} = willCollide(this, trees)
-            // console.log(collision);
             if (!collision) {
                 this.posX -= this.speedX
                 this.treeTouching = {}
             } else {
-                // console.log(treeCollision)
                 this.treeTouching = treeCollision
             }
             this.direction = directions["left"]
@@ -64,7 +57,6 @@ class Player {
                 this.posX += this.speedX
                 this.treeTouching = {}
             } else {
-                // console.log(treeCollision)
                 this.treeTouching = treeCollision
             }
             this.direction = directions["right"]
@@ -76,7 +68,6 @@ class Player {
                 this.posY -= this.speedY
                 this.treeTouching = {}
             } else {
-                // console.log(treeCollision)
                 this.treeTouching = treeCollision
             }
             this.direction = directions["up"]
@@ -88,7 +79,6 @@ class Player {
                 this.posY += this.speedY
                 this.treeTouching = {}
             } else {
-                // console.log(treeCollision)
                 this.treeTouching = treeCollision
             }
             this.direction = directions["down"]
