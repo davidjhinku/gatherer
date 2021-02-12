@@ -38,8 +38,6 @@ class Game {
     startGame(ctx){
         this.gameStatus = GAMESTATUS.PLAYING;
         this.basket.emptyBasket();
-        // this.total_trees = [];
-        // this.createMapObjects(ctx);
 
         let randFruit = FRUITS[Math.floor(Math.random() * FRUITS.length)]
         let randFruitImg = new Image();
@@ -49,7 +47,6 @@ class Game {
             name: randFruit,
             image: randFruitImg
         }
-        // console.log(this.goalFruit)
     }
 
     drawGame(ctx) {
@@ -63,7 +60,6 @@ class Game {
             end_screen.src = "src/assets/images/end_screen.png"
             ctx.drawImage(end_screen, 0, 0, end_screen.width, end_screen.height)
             return
-            // console.log('WINNDER')
         }
 
         let playerOffsetX = this.canvasWidth / 2 - this.player.posX
@@ -75,6 +71,7 @@ class Game {
         this.basket.drawBasket(ctx, this.canvasWidth, this.canvasHeight, this.goalFruit)
         this.player.drawPlayer(ctx, this.canvasWidth/2, this.canvasHeight/2)
 
+        
     }
 
     updateGame() {
@@ -113,7 +110,7 @@ class Game {
         }
 
         //Decorations
-        for (let i = 0; i < 90; i++) {
+        for (let i = 0; i < 200; i++) {
             let randX = randomObjectPosition(this.player.posX, this.mapWidth, this.mapWaterOffset)
             let randY = randomObjectPosition(this.player.posY, this.mapHeight, this.mapWaterOffset)
 

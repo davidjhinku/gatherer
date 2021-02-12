@@ -21,7 +21,6 @@ class Basket  {
     }
 
     hasItem(fruit){
-        // return !!this.items[fruit]
         return this.items.includes(fruit)
     }
 

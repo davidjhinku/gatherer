@@ -4,20 +4,23 @@ body {
     background-color: $light-blue;
 }
 
-.social-links > h1 {
-    font-family: sans-serif;
-    font-weight: 600;
-    font-size: 28px;
-}
-
 footer.social-links {
-    border: 1px solid black;
+    border: 1px solid $medium-lavendar;
+    background-color: $medium-lavendar;
+    border-radius: 10px;
     margin-top: 50px;
+    margin-left: 10px;
     width: 140px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.social-links > h1 {
+    font-family: sans-serif;
+    font-weight: 600;
+    font-size: 28px;
 }
 
 .social-logo {
