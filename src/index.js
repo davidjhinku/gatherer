@@ -17,13 +17,14 @@ let muted = true;
 let soundIcon = new Image();
 soundIcon.src = 'src/assets/images/util/mute.png'
 
-document.addEventListener('click', e => {
+canvas.addEventListener('click', e => {
     const mousePos = {
-        posX: e.clientX,
-        posY: e.clientY
+        posX: e.offsetX,
+        posY: e.offsetY
     }
-    if (mousePos.posX > 915 && mousePos.posX < 960 &&
-        mousePos.posY > 705 && mousePos.posY < 750) {
+
+    if (mousePos.posX > 950 && mousePos.posX < 1000 &&
+        mousePos.posY > 650 && mousePos.posY < 700) {
         muted = !muted
         if (!muted) {
             soundIcon.src = 'src/assets/images/util/sound.png'
