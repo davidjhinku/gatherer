@@ -4,6 +4,12 @@ body {
     background-color: $light-blue;
 }
 
+.social-links > h1 {
+    font-family: sans-serif;
+    font-weight: 600;
+    font-size: 28px;
+}
+
 footer.social-links {
     border: 1px solid black;
     margin-top: 50px;
@@ -12,10 +18,10 @@ footer.social-links {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #1F7A8C;
 }
 
 .social-logo {
     width: 50px;
     height: 50px;
+    margin: 20px;
 }
