@@ -42,7 +42,7 @@ export function willCollide(player, trees){
 
 
 export function randomObjectPosition(playerStartPos, mapSize, waterOffset) {
-    let min = playerStartPos + 150;
+    let min = playerStartPos + 200;
     let max = mapSize - waterOffset;
 
     return Math.floor((Math.random() * (max-min)) + min)
