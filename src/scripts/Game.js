@@ -110,7 +110,7 @@ class Game {
         }
 
         //Decorations
-        for (let i = 0; i < 200; i++) {
+        for (let i = 0; i < 150; i++) {
             let randX = randomObjectPosition(this.player.posX, this.mapWidth, this.mapWaterOffset)
             let randY = randomObjectPosition(this.player.posY, this.mapHeight, this.mapWaterOffset)
 

@@ -4,14 +4,17 @@ class Decoration {
         this.decoration.src = this.whichDecoration();
         this.posX = posX;
         this.posY = posY;
-        this.width = this.decoration.width*2;
-        this.height = this.decoration.height*2;
+        // this.width = 100;
+        // this.height = 100;
+        // this.setDimensions();
     }
-
+    
     drawDecoration(ctx, offsetX, offsetY) {
-        let playerOffsetX = Math.floor(this.posX + offsetX - this.width)
-        let playerOffsetY = Math.floor(this.posY + offsetY - this.height)
-
+        let playerOffsetX = this.posX + offsetX - this.width;
+        let playerOffsetY = this.posY + offsetY - this.height;
+        this.width ||= this.decoration.width*2;
+        this.height ||= this.decoration.height*2;
+        
         ctx.drawImage(this.decoration, 0, 0, this.decoration.width, this.decoration.height, playerOffsetX, playerOffsetY, this.width, this.height)
     }
 
@@ -31,6 +34,11 @@ class Decoration {
 
         return sources[Math.floor(Math.random() * sources.length)]
     }
+
+    // setDimensions(){
+    //     this.width = this.decoration.width * 2;
+    //     this.height = this.decoration.height * 2;
+    // }
 }
 
 export default Decoration
