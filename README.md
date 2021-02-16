@@ -3,7 +3,7 @@
 </p>
 
 ## Background and Overview
-Gather is an overhead exploration game designed for relaxation in the time of COVID. Users will receive a random list of fruit then set out to explore terain to collect items on their list with a relaxing soundtrack in the background. 
+Gather is an overhead exploration game designed for relaxation in the time of COVID. Users will receive a random list of fruit then set out to explore terrain to collect items on their list with a relaxing soundtrack in the background. 
 
 [Play Live](https://davidjhinku.github.io/gatherer/)
 
