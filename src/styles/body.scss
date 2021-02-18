@@ -78,9 +78,64 @@ footer.social-links {
     visibility: visible;
     // position: absolute;
     width: inherit;
+    color: white;
+    position: absolute;
+    top:373px;
+    margin-left: 35px;
+
     h1 {
-        font-size: 100px;
-        color: white;
-        position: absolute;  
+        font-size: 80px;
+        margin-bottom: 30px;
+        // position: absolute;  
+    }
+
+    p {
+        font-size: 40px;
+        width: 350px;
+        margin-bottom: 30px;
+    }
+
+    h2 {
+        font-size: 60px;
+    }
+}
+
+#end-instructions {
+    visibility: hidden;
+    // position: absolute;
+    width: inherit;
+    color: white;
+    position: absolute;
+    top:373px;
+    margin-left: 35px;
+
+    h1 {
+        font-size: 80px;
+        margin-bottom: 30px;
+        // position: absolute;  
+    }
+
+    p {
+        font-size: 40px;
+        width: 350px;
+        margin-bottom: 30px;
+    }
+
+    h2 {
+        font-size: 60px;
+    }
+
+    .license {
+        width: 300px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    hr {
+        width: 90%;
+    }
+
+    h3 {
+        font-size: 20px;
     }
 }

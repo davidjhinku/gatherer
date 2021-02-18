@@ -52,12 +52,12 @@ class Game {
     drawGame(ctx) {
         if (this.gameStatus === GAMESTATUS.START_SCREEN) {
             let start_screen = new Image()
-            start_screen.src = "src/assets/images/start_screen.png"
+            start_screen.src = "src/assets/images/blank_screen.png"
             ctx.drawImage(start_screen, 0, 0, start_screen.width, start_screen.height)
             return
         } else if (this.gameStatus === GAMESTATUS.WON) {
             let end_screen = new Image()
-            end_screen.src = "src/assets/images/end_screen.png"
+            end_screen.src = "src/assets/images/blank_screen.png"
             ctx.drawImage(end_screen, 0, 0, end_screen.width, end_screen.height)
             return
         }
@@ -86,6 +86,7 @@ class Game {
 
     won() {
         this.gameStatus = GAMESTATUS.WON
+        document.getElementById('end-instructions').style.visibility = 'visible';
     }
 
     createMapObjects(ctx) {
