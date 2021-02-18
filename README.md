@@ -69,31 +69,6 @@ In Gatherer, users will be able to:
 * Sprites - Animation
 * SCSS - Styling (would I still need this if everythings build in canvas?)
 
-## Implementation Timeline
-Feb 6-7
-* Readme and game structure planning
-
-Day 1 - Feb 8
-* Construct Map
-* Handle sizing/movement
-
-Day 2 - Feb 9
-* Build player
-* Build trees
-* Start logic
-
-Day 3 - Feb 10
-* Create splash/instructions page
-* Continue logic
-
-Day 4 - Feb 11
-* Complete logic
-* Finishing sound
-* Adding styling upgrades
-
-Day 5 - Feb 12
-* Host and sort out bugs
-
 ## Bonus Features
 * Different objects can be added for the users to find ingredients on (bushes, gardens, etc)
 * Environmental barriers (rocks, multiple levels) that user will need to find a way around
