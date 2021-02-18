@@ -10,7 +10,7 @@ footer.social-links {
     border-radius: 10px;
     margin-top: 50px;
     margin-left: 10px;
-    width: 140px;
+    width: 200px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -21,10 +21,42 @@ footer.social-links {
     font-family: sans-serif;
     font-weight: 600;
     font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.social-links > h2 {
+    font-family: sans-serif;
+    font-weight: 600;
+    font-size: 20px;
 }
 
 .social-logo {
     width: 50px;
-    height: 50px;
+    min-height: 50px;
     margin: 20px;
+}
+
+// #start-instructions {
+//     visibility: visible;
+    
+//     .h1 {
+//         font-size: 100px;
+//         color: white;
+//         position: absolute;
+//     }
+// }
+
+.canvas-wrap {
+    width: auto;
+}
+
+#start-instructions {
+    visibility: visible;
+    // position: absolute;
+    width: inherit;
+    h1 {
+        font-size: 100px;
+        color: white;
+        position: absolute;  
+    }
 }

@@ -38,7 +38,7 @@ class Game {
     startGame(ctx){
         this.gameStatus = GAMESTATUS.PLAYING;
         this.basket.emptyBasket();
-
+        document.getElementById('start-instructions').style.visibility = 'hidden';
         let randFruit = FRUITS[Math.floor(Math.random() * FRUITS.length)]
         let randFruitImg = new Image();
         randFruitImg.src = `src/assets/images/fruits/${randFruit}.png`
