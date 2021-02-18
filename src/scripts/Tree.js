@@ -14,7 +14,6 @@ class Tree {
     }
 
     drawTree(ctx, offsetX, offsetY) {
-
         let playerOffsetX = this.posX + offsetX - this.width;
         let playerOffsetY = this.posY + offsetY - this.height;
 

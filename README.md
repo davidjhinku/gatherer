@@ -38,6 +38,31 @@ In Gatherer, users will be able to:
     * Will be more useful with bonus feature of multiple fruits/longer list to collect
 * Bonus for environmental barriers
 
+## Code Snips
+Decorations, trees, and the map offset their rending coordinates based on players movements that are passed in.. While the character remains in the center of the screen, movement updates the position of the world around giving the illusion of movement. In the tree snippet below, we pass in offsetting coordinates that factor into the tree's own position and size to determine where on the canvas it should be drawn.
+
+```javascript
+constructor(posX, posY, hasFruit, fruit) {
+    this.posX = posX;
+    this.posY = posY;
+    this.width = 170;
+    this.height = 236;
+    this.collisionX = this.posX - this.width
+    this.collisionY = this.posY - this.height
+    this.hasFruit = hasFruit;
+    this.fruit = fruit
+    this.tree = new Image();
+    this.tree.src = this.whichTree();
+}
+
+drawTree(ctx, offsetX, offsetY) {
+    let playerOffsetX = this.posX + offsetX - this.width;
+    let playerOffsetY = this.posY + offsetY - this.height;
+
+    ctx.drawImage(this.tree, 0, 0, this.tree.width, this.tree.height, playerOffsetX, playerOffsetY, this.width, this.height)
+}
+```
+
 ## File Structure
 * /dist
     * ...
