@@ -20,6 +20,7 @@ footer.social-links {
 .social-links {
     font-family: sans-serif;
     font-weight: 600;
+    text-align: center;
 
     h1 {
         font-size: 28px;
@@ -38,6 +39,11 @@ footer.social-links {
     .control-logo {
         max-width: 70px;
         max-height: 70px;
+    }
+
+    .space-logo {
+        max-width: 105px;
+        max-height: 90px;
     }
 }
 
