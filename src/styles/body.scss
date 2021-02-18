@@ -17,18 +17,42 @@ footer.social-links {
     align-items: center;
 }
 
-.social-links > h1 {
+.social-links {
     font-family: sans-serif;
     font-weight: 600;
-    font-size: 28px;
-    margin-bottom: 20px;
+
+    h1 {
+        font-size: 28px;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    h3 {
+        margin-top: 10px;
+        font-size: 16px;
+    }
+
+    .control-logo {
+        max-width: 70px;
+        max-height: 70px;
+    }
 }
 
-.social-links > h2 {
-    font-family: sans-serif;
-    font-weight: 600;
-    font-size: 20px;
-}
+// .social-links > h1 {
+//     font-family: sans-serif;
+//     font-weight: 600;
+//     font-size: 28px;
+//     margin-bottom: 20px;
+// }
+
+// .social-links > h2 {
+//     font-family: sans-serif;
+//     font-weight: 600;
+//     font-size: 20px;
+// }
 
 .social-logo {
     width: 50px;
