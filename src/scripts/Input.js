@@ -1,4 +1,4 @@
-import {playMusic} from '../index'
+import {playMusic, newGame} from '../index'
 
 class Input {
     constructor(player, basket, game) {
@@ -23,7 +23,12 @@ class Input {
                     game.startGame();
                     playMusic();
                     break
+                case 27:
+                    // debugger
+                    newGame();
+                    break
             }
+            // console.log(e.keyCode)
         });
 
         document.addEventListener('keyup', e => {

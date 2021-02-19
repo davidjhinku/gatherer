@@ -47,7 +47,13 @@ export function playMusic() {
         gameBGM.currentTime = 0;
         startBGM.play();
     }
-    document.removeEventListener('mousemove', playMusic)
+}
+
+export function newGame() {
+    game = new Game(canvas.width, canvas.height, mapWidth, mapHeight, mapWaterOffset, ctx);
+    document.getElementById('start-instructions').style.visibility = 'visible';
+    document.getElementById('end-instructions').style.visibility = 'hidden';
+    game.gameStatus = 0
 }
 
 //Gameplay
